@@ -45,6 +45,18 @@
           <ol class="pp-list" id="pp-list"></ol>
           <p class="cc-hint" id="pp-empty-hint">Aún no hay vinos. Añádelos aquí, desde el <a href="buscador.html">buscador</a> o desde el <a href="carta.html">guía de carta</a>.</p>
         </fieldset>
+        <fieldset class="cc-step" id="pp-ofertas">
+          <legend><span>3</span> Ofertas del pedido</legend>
+          <div class="pp-of-grid">
+            <label class="cc-row">Botellas por caja<input data-o="caja" inputmode="numeric" placeholder="6" /></label>
+            <label class="cc-row">Pronto pago (%)<input data-o="pronto" inputmode="decimal" placeholder="2" /></label>
+            <label class="cc-row">Descuento por volumen (%)<input data-o="volPct" inputmode="decimal" placeholder="5" /></label>
+            <label class="cc-row">… a partir de (€)<input data-o="volMin" inputmode="decimal" placeholder="600" /></label>
+            <label class="cc-row">Portes gratis desde (€)<input data-o="portesMin" inputmode="decimal" placeholder="300" /></label>
+            <label class="cc-row">Regalo o acción (opcional)<input data-o="regalo" placeholder="Copas, formación al equipo, carta impresa…" /></label>
+          </div>
+          <p class="cc-hint">La oferta de cada vino (descuento o «5 + 1») se elige en su línea, arriba.</p>
+        </fieldset>
         <div class="pp-actions">
           <button type="button" class="btn solid" id="pp-print">Guardar en PDF</button>
           <button type="button" class="btn" id="pp-link">Copiar enlace</button>

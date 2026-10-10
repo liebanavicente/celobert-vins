@@ -30,13 +30,19 @@
   const nameOf = (v) => (v.id && byId[v.id] ? byId[v.id].name : v.nombre || "Vino sin nombre");
 
   // ---------- las cuentas de un vino ----------
-  function calc(v) {
-    const coste = num(v.coste), copa = num(v.copa), copas = num(v.copas), mes = num(v.mes);
-    if (coste == null || copa == null || !copas) return null;
+  // el precio de la copa puede ser un número («4,50») o una horquilla («4–6», «4-6», «4 a 6»)
+  const rango = (s) => {
+    const parts = String(s ?? "").split(/\s*(?:–|—|-|\ba\b)\s*/).map(num).filter((v) => v != null);
+    if (!parts.length) return null;
+    const lo = Math.min(...parts), hi = Math.max(...parts);
+    return [lo, hi];
+  };
+  function at(v, copa) {
+    const coste = num(v.coste), copas = num(v.copas), mes = num(v.mes);
     const neto = st.iva ? copa / (1 + IVA) : copa; // lo que se queda el restaurante de cada copa
     const costeCopa = coste / copas;
     const r = {
-      neto, costeCopa,
+      copa, neto, costeCopa,
       ingresoBotella: neto * copas,
       beneficioCopa: neto - costeCopa,
       beneficioBotella: neto * copas - coste,
@@ -48,6 +54,13 @@
     const m = num(st.objetivo);
     if (m != null && m > 0 && m < 100) r.sugerido = (costeCopa / (1 - m / 100)) * (st.iva ? 1 + IVA : 1);
     return r;
+  }
+  // devuelve las cuentas al precio bajo y al alto de la horquilla (iguales si es un precio único) y al punto medio
+  function calc(v) {
+    const coste = num(v.coste), copas = num(v.copas), r = rango(v.copa);
+    if (coste == null || !r || !copas) return null;
+    const [lo, hi] = r;
+    return { lo: at(v, lo), hi: at(v, hi), mid: at(v, (lo + hi) / 2), range: hi > lo };
   }
 
   // ---------- formulario ----------
@@ -64,7 +77,7 @@
             : `<label class="cc-row">Vino<input data-f="nombre" value="${esc(v.nombre)}" placeholder="Busca en el catálogo o escribe un nombre" autocomplete="off" /></label><div class="pp-sugg" data-sugg></div>`}
           <div class="cp-grid">
             <label class="cc-row">Le cuesta la botella<input data-f="coste" inputmode="decimal" value="${esc(v.coste)}" placeholder="Ej. 9,50 €" /></label>
-            <label class="cc-row">Vende la copa a<input data-f="copa" inputmode="decimal" value="${esc(v.copa)}" placeholder="Ej. 4,50 €" /></label>
+            <label class="cc-row">Vende la copa a<input data-f="copa" value="${esc(v.copa)}" placeholder="4,50 € o una horquilla: 4–6 €" /></label>
             <label class="cc-row">Copas por botella<select data-f="copas">${[4, 5, 6, 7, 8].map((n) => `<option value="${n}" ${String(n) === String(v.copas) ? "selected" : ""}>${n}${n === 5 ? " · copa de 15 cl" : n === 6 ? " · copa de 12,5 cl" : ""}</option>`).join("")}</select></label>
             <label class="cc-row">Copas al mes (opcional)<input data-f="mes" inputmode="numeric" value="${esc(v.mes)}" placeholder="Ej. 120" /></label>
           </div>
@@ -110,24 +123,30 @@
   $("cp-reset").addEventListener("click", () => { st = BLANK(); save(); paintForm(); paintResult(); });
 
   // ---------- resultado (pantalla y PDF: la misma hoja) ----------
+  // una cifra o, si hay horquilla, «de … a …»
+  // compacta: «2,55–4,36 €», «56–69 %», «2–3.ª copa» (de menor a mayor, con la unidad una sola vez)
+  const two = (c, f) => {
+    let x = f(c.lo), y = f(c.hi);
+    if (!c.range || x === y) return x;
+    const n = (s) => parseFloat(s.replace(/\./g, "").replace(",", ".").replace(/[^\d.]/g, ""));
+    if (n(x) > n(y)) [x, y] = [y, x];
+    const suf = (s) => s.match(/[^\d]*$/)[0];
+    return suf(x) === suf(y) ? `${x.slice(0, x.length - suf(x).length)}–${y}` : `${x} – ${y}`;
+  };
   function verdict(rows) {
     const ok = rows.filter((r) => r.c);
     if (ok.length < 2) return "";
     const [a, ...rest] = ok;
+    const medio = ok.some((r) => r.c.range) ? ` <small>(con la copa a mitad de su horquilla)</small>` : "";
     return rest.map((b) => {
-      a.v = a.v || {};
-      const d = b.c.beneficioCopa - a.c.beneficioCopa;
+      const A = a.c.mid, B = b.c.mid;
+      const d = B.beneficioCopa - A.beneficioCopa;
       let s = d >= 0
         ? `Cada copa de <b>${esc(b.name)}</b> deja <b>${eur(d)}</b> más que una de <b>${esc(a.name)}</b>.`
-        : `Cada copa de <b>${esc(b.name)}</b> deja <b>${eur(-d)}</b> menos que una de <b>${esc(a.name)}</b>.`;
-      if (d < 0) {
-        const precio = (a.c.beneficioCopa + b.c.costeCopa) * (st.iva ? 1 + IVA : 1);
-        s += ` Para ganar lo mismo por copa, habría que venderla a <b>${eur(precio)}</b>.`;
-      }
-      // al mes, con las mismas copas (las del vino de referencia), para comparar en igualdad
+        : `Cada copa de <b>${esc(b.name)}</b> deja <b>${eur(-d)}</b> menos que una de <b>${esc(a.name)}</b>. Para ganar lo mismo por copa, habría que venderla a <b>${eur((A.beneficioCopa + B.costeCopa) * (st.iva ? 1 + IVA : 1))}</b>.`;
       const copasMes = num(a.v.mes);
-      if (copasMes) s += ` Si sus ${copasMes.toLocaleString("es-ES")} copas al mes fueran de ${esc(b.name)}: <b>${eur(copasMes * b.c.beneficioCopa, 0)}</b> al mes, frente a <b>${eur(copasMes * a.c.beneficioCopa, 0)}</b>.`;
-      return `<p>${s}</p>`;
+      if (copasMes) s += ` Si sus ${copasMes.toLocaleString("es-ES")} copas al mes fueran de ${esc(b.name)}: <b>${eur(copasMes * B.beneficioCopa, 0)}</b> al mes, frente a <b>${eur(copasMes * A.beneficioCopa, 0)}</b>.`;
+      return `<p>${s}${medio}</p>`;
     }).join("");
   }
   function paintResult() {
@@ -135,37 +154,46 @@
     const ready = rows.some((r) => r.c);
     const fecha = new Date().toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
     const line = (label, f, cls = "") => `<tr class="${cls}"><th>${label}</th>${rows.map((r) => `<td>${r.c ? f(r.c, r) : "—"}</td>`).join("")}</tr>`;
+    const hero = (r, i) => {
+      const c = r.c;
+      if (!c) return `<div class="cp-hero-card empty"><p class="cp-name">${esc(r.name)}</p><p class="cp-mid">Faltan el coste y el precio de la copa</p></div>`;
+      return `
+        <div class="cp-hero-card">
+          <div class="cp-hero-top">
+            ${r.w ? `<img src="${r.w.img}" alt="" />` : `<span class="cp-letter">${String.fromCharCode(65 + i)}</span>`}
+            <div><p class="cp-name">${esc(r.name)}</p><p class="cp-mid">Copa a ${two(c, (x) => eur(x.copa))} · ${esc(r.v.copas)} copas por botella</p></div>
+          </div>
+          <p class="cp-huge">${two(c, (x) => eur(x.beneficioCopa))}<small>gana en cada copa</small></p>
+          ${c.lo.mes != null ? `<p class="cp-huge month">${two(c, (x) => eur(x.mes, 0))}<small>al mes, con ${esc(r.v.mes)} copas</small></p>` : ""}
+          <dl class="cp-kpis">
+            <div><dt>Por botella</dt><dd>${two(c, (x) => eur(x.beneficioBotella))}</dd></div>
+            <div><dt>Margen</dt><dd>${two(c, (x) => pct(x.margen))}</dd></div>
+            <div><dt>Botella pagada</dt><dd>${two(c, (x) => (x.pagadaEn ? `${x.pagadaEn}.ª copa` : "—"))}</dd></div>
+          </dl>
+        </div>`;
+    };
     $("cp-sheet").innerHTML = `
       <header class="cp-head">
         <p class="cp-k">Vino por copas · cálculo para</p>
         <h2>${esc(st.cliente || "el restaurante")}</h2>
-        <p class="cp-sub">${fecha} · precios de carta ${st.iva ? "con IVA (10 %)" : "sin IVA"} · margen objetivo ${esc(st.objetivo || "—")} %</p>
+        <p class="cp-sub">${fecha} · precios de carta ${st.iva ? "con IVA (10 %)" : "sin IVA"}${num(st.objetivo) ? ` · margen objetivo ${esc(st.objetivo)} %` : ""}</p>
       </header>
       ${ready ? `
-      <div class="cp-cards">${rows.map((r, i) => `
-        <div class="cp-card${r.c ? "" : " empty"}">
-          ${r.w ? `<img src="${r.w.img}" alt="" />` : `<span class="cp-letter">${String.fromCharCode(65 + i)}</span>`}
-          <p class="cp-name">${esc(r.name)}</p>
-          ${r.c ? `<p class="cp-big">${eur(r.c.beneficioCopa)}<small>de beneficio por copa</small></p><p class="cp-mid">${eur(r.c.beneficioBotella)} por botella · margen ${pct(r.c.margen)}</p>` : `<p class="cp-mid">Faltan coste y precio de copa</p>`}
-        </div>`).join("")}</div>
+      <div class="cp-heroes n${rows.length}">${rows.map(hero).join("")}</div>
+      ${verdict(rows) ? `<div class="cp-verdict">${verdict(rows)}</div>` : ""}
+      <p class="cp-detail-k">El detalle</p>
       <table class="cp-table">
         <thead><tr><th></th>${rows.map((r, i) => `<th>${String.fromCharCode(65 + i)} · ${esc(r.name)}</th>`).join("")}</tr></thead>
         <tbody>
           ${line("Coste de la botella", (c, r) => eur(num(r.v.coste)))}
-          ${line("Precio de la copa", (c, r) => eur(num(r.v.copa)))}
-          ${line("Copas por botella", (c, r) => esc(r.v.copas))}
-          ${line("Coste por copa", (c) => eur(c.costeCopa))}
-          ${line(st.iva ? "Ingreso por copa (sin IVA)" : "Ingreso por copa", (c) => eur(c.neto))}
-          ${line("Beneficio por copa", (c) => `<b>${eur(c.beneficioCopa)}</b>`, "hl")}
-          ${line("Beneficio por botella", (c) => `<b>${eur(c.beneficioBotella)}</b>`, "hl")}
-          ${line("Margen", (c) => pct(c.margen))}
-          ${line("Botella pagada en la copa", (c) => (c.pagadaEn ? `${c.pagadaEn}.ª` : "—"))}
-          ${line("Al mes (con las copas indicadas)", (c) => (c.mes != null ? `${eur(c.mes, 0)} · ${c.botellasMes.toLocaleString("es-ES", { maximumFractionDigits: 1 })} bot.` : "—"))}
-          ${line(`Precio de copa para un margen del ${esc(st.objetivo || "—")} %`, (c) => (c.sugerido ? eur(c.sugerido) : "—"))}
+          ${line("Precio de la copa", (c) => two(c, (x) => eur(x.copa)))}
+          ${line("Coste por copa", (c) => eur(c.lo.costeCopa))}
+          ${line(st.iva ? "Ingreso por copa (sin IVA)" : "Ingreso por copa", (c) => two(c, (x) => eur(x.neto)))}
+          ${line("Al mes (botellas)", (c) => (c.lo.botellasMes != null ? `${c.lo.botellasMes.toLocaleString("es-ES", { maximumFractionDigits: 1 })} bot.` : "—"))}
+          ${num(st.objetivo) ? line(`Precio de copa para un margen del ${esc(st.objetivo)} %`, (c) => (c.lo.sugerido ? eur(c.lo.sugerido) : "—"), "hl") : ""}
         </tbody>
-      </table>
-      ${verdict(rows) ? `<div class="cp-verdict">${verdict(rows)}</div>` : ""}`
-      : `<p class="cp-empty">Escribe el coste de la botella y el precio de la copa para ver las cuentas.</p>`}
+      </table>`
+      : `<p class="cp-empty">Escribe el coste de la botella y el precio de la copa (o su horquilla) para ver las cuentas.</p>`}
       <footer class="cp-foot"><span>Cálculo orientativo con los datos que ha facilitado el restaurante.${st.iva ? " Los precios de carta incluyen el IVA de hostelería (10 %)." : ""} Disfruta de un consumo responsable.</span><span class="brand-word">${document.body.dataset.brandWord || BRAND}</span></footer>`;
     $("cp-pdf").disabled = !ready;
   }
