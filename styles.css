@@ -1466,3 +1466,7 @@ body.pp-view .pp-view-only { display: flex; justify-content: space-between; alig
 .pp-test-note { margin: 10px 8% 0; font-size: 12px; font-weight: 600; color: #8a5a00; }
 .pp-export .pp-test-note { margin: 10px 64px 0 !important; }
 .pp-export .pp-test-tag { line-height: 10px !important; padding: 1px 6px 6px !important; }
+.rc-why-list { margin: 0 0 26px; padding-left: 1.1em; max-width: 64ch; font-family: var(--serif); font-size: 17px; line-height: 1.5; }
+.rc-why-list li { margin: 0 0 6px; }
+@media (max-width: 640px) { .rc-why-list { font-size: 15.5px; } }
+.rc-uva { display: block; font-size: 12.5px; color: var(--ink-2); margin: 2px 0 6px; }
