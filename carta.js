@@ -1,4 +1,6 @@
-// «Asistente de carta» para comerciales: en la visita, el comercial marca la cocina del cliente, el tamaño de carta y lo que ya tiene; la herramienta
+// «Guía de carta» (orientativa) para comerciales: según la cocina del cliente y el tamaño de su carta, un reparto equilibrado por
+// estilos (criterio general de sumillería, no una norma) e ideas del catálogo para cada estilo. La guía recuerda su estado y se
+// puede empezar de nuevo; solo cuenta los vinos que se añaden desde ella. Antes: «asistente»; la herramienta
 // compara con un reparto orientativo y propone vinos del catálogo para cubrir los huecos. Lo elegido va a «Mi selección»
 // (la misma que el catálogo, en localStorage) y de ahí a la plataforma de pedidos.
 // Datos: tipo de cada vino en carta-data.js (ficha oficial o nombre/denominación sin dudas). Sin datos de ventas ni
@@ -28,6 +30,15 @@
     asiatica: ["Asiática / fusión", { espumoso: 16, blanco: 44, rosado: 12, tinto: 18, generoso: 5, dulce: 5 }],
     alta: ["Alta cocina / degustación", { espumoso: 14, blanco: 34, rosado: 6, tinto: 34, generoso: 6, dulce: 6 }],
   };
+  const POR_QUE = {
+    mediterranea: "Equilibrio entre blancos y tintos, algún rosado para los meses de calor y un espumoso para abrir.",
+    pescado: "Más blancos y espumosos, cuya acidez acompaña pescado y marisco, y algún generoso para el aperitivo.",
+    carnes: "Los tintos llevan el peso; blancos con cuerpo para los entrantes y un dulce para el postre.",
+    arroces: "Blancos y rosados frescos para los arroces de marisco y algún tinto ligero para los de carne.",
+    tapas: "Variedad y vino por copas: generosos y espumosos dan mucho juego con el picoteo.",
+    asiatica: "Blancos aromáticos y espumosos, que acompañan especias y picante, y pocos tintos, ligeros.",
+    alta: "Una carta amplia para maridar un menú largo, con generosos y dulces para los últimos pases.",
+  };
   const CAT_DOS = /conca del riu anoia|penedes|parcel|priorat|montsant|tarragona|costers del segre|emporda|terra alta|gandesa|pla de bages|valles/;
   const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
@@ -38,8 +49,24 @@
   $("cc-pend").textContent = `Hoy: ${WINES.length} vinos con estilo conocido; ${pending} esperan su ficha oficial y no se proponen todavía.`;
 
   // ---------- formulario ----------
-  let cocina = "mediterranea";
-  const have = Object.fromEntries(STYLES.map(([k]) => [k, 0]));
+  const GKEY = KEY.replace("seleccion", "guia");
+  const BLANK = () => ({ cocina: "mediterranea", have: Object.fromEntries(STYLES.map(([k]) => [k, 0])), size: "24", origen: "espana", gama: "entrada,media", cliente: "", ideas: [] });
+  let guide = (() => { try { return { ...BLANK(), ...JSON.parse(localStorage.getItem(GKEY) || "{}") }; } catch { return BLANK(); } })();
+  let cocina = guide.cocina;
+  const have = guide.have;
+  const persist = () => {
+    guide.cocina = cocina;
+    guide.size = $("cc-size").value; guide.origen = $("cc-origen").value; guide.cliente = $("cc-cliente").value;
+    if ($("cc-gama")) guide.gama = $("cc-gama").value;
+    try { localStorage.setItem(GKEY, JSON.stringify(guide)); } catch {}
+  };
+  // pone el formulario como dice el estado guardado
+  const syncForm = () => {
+    $("cc-size").value = guide.size; $("cc-origen").value = guide.origen; $("cc-cliente").value = guide.cliente;
+    if ($("cc-gama")) $("cc-gama").value = guide.gama;
+    document.querySelectorAll(".cc-chip").forEach((c) => { c.classList.toggle("on", c.dataset.k === cocina); c.setAttribute("aria-checked", c.dataset.k === cocina); });
+    document.querySelectorAll(".cc-stepper").forEach((r) => (r.querySelector("output").textContent = have[r.dataset.k]));
+  };
   $("cc-cocina").innerHTML = Object.entries(COCINAS).map(([k, [label]]) => `<button type="button" role="radio" class="cc-chip${k === cocina ? " on" : ""}" aria-checked="${k === cocina}" data-k="${k}">${esc(label)}</button>`).join("");
   $("cc-have").innerHTML = STYLES.map(([k, label, sub]) => `
     <div class="cc-stepper" data-k="${k}">
@@ -71,6 +98,7 @@
   const save = (o) => { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch {} };
   const inSel = (id) => load().some((o) => o.id === id);
   function add(ids) {
+    ids.forEach((id) => { if (!guide.ideas.includes(id)) guide.ideas.push(id); });
     const o = load();
     ids.forEach((id) => { if (!o.some((y) => y.id === id)) o.push({ id, n: 1 }); });
     save(o);
@@ -109,16 +137,18 @@
     const size = Number($("cc-size").value), pref = $("cc-origen").value, mix = COCINAS[cocina][1];
     const target = Object.fromEntries(STYLES.map(([k]) => [k, Math.max(k === "dulce" || k === "generoso" ? 1 : 0, Math.round((size * mix[k]) / 100))]));
     const sel = new Set(load().map((o) => o.id));
-    const inProp = WINES.filter((x) => sel.has(x.id));
+    const mine = new Set(guide.ideas);
+    const inProp = WINES.filter((x) => mine.has(x.id) && sel.has(x.id));
     const added = Object.fromEntries(STYLES.map(([k]) => [k, inProp.filter((x) => x.t.tipo === k).length]));
     const rows = STYLES.map(([k, label]) => {
       const gap = Math.max(0, target[k] - have[k] - added[k]);
-      return { k, label, gap, list: gap ? suggest(k, gap, pref, sel) : [] };
+      return { k, label, gap, target: target[k], cur: have[k] + added[k], list: gap ? suggest(k, gap, pref, sel) : [] };
     });
     return { size, pref, target, added, inProp, rows, gaps: rows.filter((r) => r.gap > 0) };
   }
 
   function render() {
+    persist();
     const { size, pref, target, added, inProp, gaps } = plan();
     const totalHave = Object.values(have).reduce((a, b) => a + b, 0);
     const max = Math.max(...STYLES.map(([k]) => Math.max(target[k], have[k] + added[k])), 1);
@@ -135,7 +165,7 @@
     const missing = gaps.reduce((a, g) => a + g.gap, 0);
     const blocks = gaps.map((g) => `
         <div class="cc-gap">
-          <h3>${g.label} <small>le ${g.gap === 1 ? "falta 1" : `faltan ${g.gap}`}</small></h3>
+          <h3>Ideas de ${g.label.toLowerCase()} <small>orientativo: ${g.target} · tiene ${g.cur}</small></h3>
           ${g.list.length ? `<div class="cc-cards">${g.list.map((x) => `
             <article class="cc-card">
               <img src="${x.img_hd || x.img}" alt="" loading="lazy" />
@@ -152,12 +182,13 @@
     $("cc-result").innerHTML = `
       <div class="cc-panel">
         <p class="kicker">${esc($("cc-cliente").value.trim() || "La carta del cliente")} · ${esc(COCINAS[cocina][0])} · ${size} referencias</p>
-        <h2>${missing ? `Le faltan <em>${missing}</em> referencias` : "Su carta está <em>equilibrada</em>"}</h2>
-        <p class="cc-legend"><i class="lg-have"></i> lo que tiene (${totalHave}) <i class="lg-add"></i> en la propuesta (${inProp.length}) <i class="lg-target"></i> reparto orientativo</p>
+        <h2>Reparto orientativo <em>para ${size} referencias</em></h2>
+        <p class="cc-why">${esc(POR_QUE[cocina])} <small>Criterio general de sumillería: una referencia para conversar, no una norma.</small></p>
+        <p class="cc-legend"><i class="lg-have"></i> lo que tiene (${totalHave}) <i class="lg-add"></i> en la propuesta (${inProp.length}) <i class="lg-target"></i> orientativo</p>
         ${bars}
       </div>
-      ${blocks}
-      <div class="cc-all">${allIds.length ? `<button type="button" class="btn solid" id="cc-add-all">Añadir las ${allIds.length} a la propuesta</button>` : ""}${inProp.length || allIds.length ? `<button type="button" class="btn" id="cc-share">Compartir la propuesta</button>` : ""}${inProp.length ? `<a class="btn" href="propuesta.html">Ver la propuesta visual (${inProp.length})</a>` : ""}</div>`;
+      ${blocks || `<p class="cc-done">Con lo que tiene y lo que has añadido, su carta ya sigue este reparto orientativo.</p>`}
+      <div class="cc-all">${allIds.length ? `<button type="button" class="btn solid" id="cc-add-all">Añadir las ${allIds.length} ideas a la propuesta</button>` : ""}${inProp.length || allIds.length ? `<button type="button" class="btn" id="cc-share">Compartir la propuesta</button>` : ""}${inProp.length ? `<a class="btn" href="propuesta.html">Ver la propuesta visual (${inProp.length})</a>` : ""}</div>`;
   }
 
   $("cc-result").addEventListener("click", (e) => {
@@ -180,6 +211,19 @@
     if (e.target.id === "cc-add-all") add(plan().gaps.flatMap((g) => g.list.map((x) => x.id)));
   });
 
+  // empezar de nuevo: vacía la guía (no toca la propuesta: lo añadido sigue en «Mi selección»)
+  $("cc-reset").addEventListener("click", () => {
+    guide = BLANK();
+    cocina = guide.cocina;
+    Object.keys(have).forEach((k) => (have[k] = 0));
+    guide.have = have;
+    syncForm();
+    render();
+    $("cc-reset-ok").hidden = false;
+    setTimeout(() => ($("cc-reset-ok").hidden = true), 3200);
+  });
+
+  syncForm();
   paintFab();
   render();
 })();

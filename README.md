@@ -19,9 +19,9 @@ bodega real es casual.
   una ficha por vino y cierre), que se descarga en PDF A4 o se comparte por enlace.
 - **Carta de vinos del restaurante**: con los vinos que compra el cliente, maqueta su carta (nombre,
   logo, precios de botella y copa) en tres diseños; se reparte sola en hojas A4 y se descarga en PDF.
-- **Asistente de carta para comerciales**: según la cocina del restaurante, el tamaño de su carta,
-  su gama de precio y lo que ya tiene, propone qué estilos le faltan y con qué vinos cubrirlos, y
-  genera un texto para compartir con el cliente.
+- **Guía de carta orientativa**: según la cocina del restaurante, el tamaño de su carta y su gama de
+  precio, un reparto equilibrado por estilos e ideas del catálogo para cada uno; se puede reiniciar
+  y genera un texto para compartir con el cliente.
 - **Botellas dibujadas con código** (SVG): forma, vidrio y etiqueta según el vino y la bodega.
 
 ## Cómo está hecho

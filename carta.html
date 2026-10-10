@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Asistente de carta · Celobert Vins (portfolio)</title>
+  <title>Guía de carta · Celobert Vins (portfolio)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
@@ -18,13 +18,14 @@
     <section class="cc-hero">
       <div class="wrap">
         <p class="kicker">Para el equipo comercial · prototipo</p>
-        <h1>Asistente de carta <em>para comerciales</em></h1>
-        <p class="lead">En la visita al restaurante: marca su cocina y lo que ya tiene en carta. En un minuto ves qué estilos le faltan y qué vinos del catálogo los cubren, y le dejas la propuesta preparada. El argumento lo pones tú; esto te da los datos.</p>
+        <h1>Guía de carta <em>orientativa</em></h1>
+        <p class="lead">Una referencia para la visita: según la cocina del cliente y el tamaño de su carta, un reparto equilibrado por estilos e ideas del catálogo para cada uno. Orienta la conversación; la decisión es del cliente y de su sumiller.</p>
       </div>
     </section>
 
     <section class="wrap cc-tool">
       <form class="cc-form" id="cc-form" autocomplete="off">
+        <div class="cc-reset-row"><button type="button" class="btn ghost" id="cc-reset">Empezar de nuevo</button><span class="cc-reset-ok" id="cc-reset-ok" hidden>Guía vacía. Lo que añadiste sigue en la propuesta.</span></div>
         <fieldset class="cc-step">
           <legend><span>1</span> La cocina del cliente</legend>
           <div class="cc-chips" id="cc-cocina" role="radiogroup" aria-label="Tipo de cocina"></div>
@@ -44,7 +45,7 @@
           <label class="cc-row">Origen que prefiere
             <select id="cc-origen"><option value="cerca">Cercanía (Catalunya)</option><option value="espana" selected>España</option><option value="mundo">Internacional</option><option value="todo">Me da igual</option></select>
           </label>
-          <p class="cc-hint">¿Cuántas referencias tiene ya de cada estilo?</p>
+          <p class="cc-hint">¿Cuántas referencias tiene ya de cada estilo? (Si no lo sabes, déjalo en 0.)</p>
           <div class="cc-have" id="cc-have"></div>
         </fieldset>
       </form>

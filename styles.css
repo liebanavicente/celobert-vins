@@ -1204,3 +1204,10 @@ body.pp-view .pp-view-only { display: flex; justify-content: space-between; alig
 .cv-page.t-moderna .cv-main b { font-family: var(--sans); font-weight: 600; font-size: 17px; }
 .cv-page.t-moderna .cv-price { font-family: var(--sans); font-weight: 600; font-size: 16px; }
 @media (max-width: 900px) { .cv-pages { gap: 16px; } }
+
+/* guía de carta (orientativa) */
+.cc-reset-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.cc-reset-ok { font-size: 13px; color: var(--olive); }
+.cc-why { font-family: var(--serif); font-size: 17px; line-height: 1.45; margin: 0 0 14px; max-width: 60ch; opacity: 0.92; }
+.cc-why small { display: block; font-family: var(--sans); font-size: 12px; opacity: 0.7; margin-top: 6px; }
+.cc-done { font-family: var(--serif); font-size: 19px; color: var(--ink-2); margin: 10px 0 24px; }
