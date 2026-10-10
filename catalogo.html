@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo · Celobert Vins (portfolio)</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    // antes de pintar: lo que va a entrar animado no parpadea (si GSAP no carga en 4 s, se enseña todo)
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim');
+    setTimeout(() => { if (!window.gsap) document.documentElement.classList.remove('js-anim', 'js-intro'); }, 4000);
+  </script>
+</head>
+<body>
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="Celobert Vins"><span class="brand-mark" data-mandala></span><span class="brand-word">celobert<small>vins</small></span></a>
+      <nav class="nav">
+        <a href="index.html#vinos">Vinos</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="index.html#profesionales">Profesionales</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="pro-btn" href="#" data-platform>Acceso clientes</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="cat-hero">
+      <div class="wrap">
+        <p class="kicker">Catálogo vivo · siempre al día</p>
+        <h1>Catálogo <em id="zone-name">Barcelona</em></h1>
+        <p class="lead"><b id="cat-count">0</b> vinos de <b id="cat-wineries">0</b> bodegas. Busca, filtra, guarda tu selección y pídela en la plataforma de clientes. ¿Eres del equipo comercial? <a href="carta.html">Asistente de carta →</a></p>
+        <p class="print-only" id="print-date"></p>
+        <div class="zone-tabs" id="zone-tabs"></div>
+        <p class="zone-note" id="zone-note" hidden></p>
+      </div>
+    </section>
+
+    <div class="cat-bar" id="cat-bar">
+      <div class="wrap">
+        <label class="cat-search"><span class="sr">Buscar</span><input type="search" id="q" placeholder="Busca un vino, una bodega o una zona…" autocomplete="off" /></label>
+        <div class="cat-filters">
+          <div class="chips country" id="f-country"></div>
+          <select id="f-do" aria-label="Denominación"></select>
+          <select id="f-winery" aria-label="Bodega"></select>
+        </div>
+        <div class="cat-tools">
+          <div class="toggle" role="tablist"><button type="button" data-view="bodegas" class="on">Por bodega</button><button type="button" data-view="botellas">Todas las botellas</button></div>
+          <button type="button" class="btn" id="print-cat">Descargar PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="wrap cat-featured" id="cat-featured"></section>
+    <section class="wrap" id="results" aria-live="polite"></section>
+    <p class="wrap cat-empty" id="cat-empty" hidden>No hay vinos con esos filtros. <button type="button" class="linkish" id="clear">Quitar filtros</button></p>
+    <p class="wrap cat-source">Celobert Vins es una distribuidora ficticia creada para un portfolio: bodegas, vinos, fichas y botellas son inventados (las zonas, reales). En la versión real, el catálogo se alimentaría de los mismos datos que vuestra plataforma de pedidos: siempre al día, y cada pedido se hace allí.</p>
+  </main>
+
+  <button type="button" class="order-fab" id="order-fab">Mi selección <b id="order-n">0</b></button>
+  <aside class="drawer" id="order" aria-label="Mi selección" hidden>
+    <div class="drawer-head"><h2>Mi selección</h2><button type="button" class="x" id="order-close" aria-label="Cerrar">×</button></div>
+    <div id="order-list"></div>
+    <div class="drawer-foot" id="order-foot">
+      <label>Local<input id="o-local" placeholder="Nombre del restaurante o tienda" /></label>
+      <label>Zona<select id="o-zone"><option>Barcelona</option><option>Girona</option><option>Tarragona</option><option>Madrid</option></select></label>
+      <label>Notas<textarea id="o-notes" rows="2" placeholder="Fechas, formatos, dudas…"></textarea></label>
+      <div class="btns"><button type="button" class="btn solid" id="o-platform" data-platform>Hacer el pedido en la plataforma</button><button type="button" class="btn" id="o-send">Enviar al comercial</button><button type="button" class="btn" id="o-print">Descargar (PDF)</button></div>
+      <p class="ok" id="o-ok" hidden></p>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="modal reel-modal" id="reel" role="dialog" aria-modal="true" aria-label="Reel de la bodega" hidden>
+    <div class="modal-card reel-card">
+      <button type="button" class="x" id="reel-close" aria-label="Cerrar">×</button>
+      <div class="reel-phone"><div class="phone"><video id="reel-video" controls playsinline preload="metadata"></video></div></div>
+      <div class="modal-body">
+        <p class="kicker">Reel de la bodega</p>
+        <h2 id="reel-name"></h2>
+        <p class="winery" id="reel-do"></p>
+        <p class="lead">Para las redes de Celobert y para presentar la bodega a tus clientes. Listo para publicar.</p>
+        <div class="downloads" id="reel-dl"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-card">
+      <button type="button" class="x" id="modal-close" aria-label="Cerrar">×</button>
+      <div class="modal-bottle"><img id="m-img" alt="" /></div>
+      <div class="modal-body">
+        <p class="kicker" id="m-do"></p>
+        <h2 id="m-name"></h2>
+        <p class="winery" id="m-winery"></p>
+        <div class="chips" id="m-chips"></div>
+        <div class="qty"><button type="button" id="m-minus" aria-label="Menos">−</button><span id="m-qty">6</span><button type="button" id="m-plus" aria-label="Más">+</button><small>botellas</small></div>
+        <div class="btns"><button type="button" class="btn solid" id="m-add">Añadir a mi selección</button><button type="button" class="btn" data-platform>Pedir en la plataforma</button><a class="btn" id="m-ficha" hidden>Ver ficha completa</a><button type="button" class="btn" id="m-sheet">Pedir ficha técnica</button></div>
+        <p class="ok" id="m-ok" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="contacto">
+    <div class="wrap grid-2">
+      <div>
+        <p class="kicker">Contacto</p>
+        <h2 style="font-size:clamp(30px,3.6vw,44px)">¿Restaurante, bar o tienda?</h2>
+        <p class="lead" style="margin-top:14px">Te ponemos en contacto con el comercial de tu zona para precios, disponibilidad y catas.</p>
+      </div>
+      <form class="zone" onsubmit="event.preventDefault(); this.querySelector('p.ok').hidden=false;">
+        <p style="margin:0 0 10px"><input required placeholder="Nombre del local" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit" /></p>
+        <p style="margin:0 0 10px"><input required placeholder="Correo o teléfono" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit" /></p>
+        <p style="margin:0 0 14px"><select style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit"><option>Barcelona</option><option>Girona</option><option>Tarragona</option><option>Madrid</option></select></p>
+        <button class="btn solid" type="submit">Quiero que me llaméis</button>
+        <p class="ok" hidden style="margin:14px 0 0;color:var(--olive);font-weight:600">Prototipo: aquí la petición llegaría al comercial de tu zona.</p>
+      </form>
+    </div>
+  </section>
+  <footer class="foot">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+  <script src="catalogo-data.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="data.js"></script>
+  <script src="destacados.js"></script>
+  <script src="app.js"></script>
+  <!-- GSAP en local: la propuesta funciona sin internet -->
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="assets/vendor/Flip.min.js"></script>
+  <script src="anim.js"></script>
+  <script src="catalogo.js"></script>
+</body>
+</html>

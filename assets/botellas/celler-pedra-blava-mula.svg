@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 400" width="120" height="400">
+  <defs>
+    <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#0f1711"/><stop offset="0.45" stop-color="#1d2a1f"/><stop offset="1" stop-color="#0f1711"/></linearGradient>
+    <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="curve" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="0.25" stop-color="#000" stop-opacity="0"/><stop offset="0.75" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient>
+    <clipPath id="bc"><path d="M46 18 H74 V30 H72 V96 C72 118 94 124 94 150 V384 Q94 392 86 392 H34 Q26 392 26 384 V150 C26 124 48 118 48 96 V30 H46 Z"/></clipPath>
+    <clipPath id="lc"><rect x="30" y="214" width="60" height="120"/></clipPath>
+  </defs>
+  <path d="M46 18 H74 V30 H72 V96 C72 118 94 124 94 150 V384 Q94 392 86 392 H34 Q26 392 26 384 V150 C26 124 48 118 48 96 V30 H46 Z" fill="url(#glass)"/>
+  
+  <rect x="46" y="18" width="28" height="62" fill="#5b1f1c"/>
+  <g clip-path="url(#lc)"><rect x="30" y="214" width="60" height="120" fill="#efe6d6"/><rect x="30" y="214" width="60" height="26.4" fill="#7a2e2a"/>
+      <text x="60" y="230.8" font-family="Helvetica, Arial, sans-serif" font-size="3.4722222222222223" font-weight="700" letter-spacing="0.6" fill="#efe6d6" text-anchor="middle">CELLER PEDRA BLAVA</text>
+      <text x="60" y="281.2" font-family="Georgia, 'Times New Roman', serif" font-size="11" fill="#2a2220" text-anchor="middle">Mula</text>
+      <line x1="45" x2="75" y1="298" y2="298" stroke="#7a2e2a" stroke-width="0.8"/>
+      <text x="60" y="314.8" font-family="Helvetica, Arial, sans-serif" font-size="4.2" letter-spacing="0.4" fill="#2a2220" text-anchor="middle">DOQ PRIORAT</text></g>
+    <rect x="30" y="214" width="60" height="120" fill="url(#curve)"/>
+  <rect x="36" y="88" width="5" height="294" fill="url(#shine)" clip-path="url(#bc)" opacity="0.7"/>
+  <path d="M46 18 H74 V30 H72 V96 C72 118 94 124 94 150 V384 Q94 392 86 392 H34 Q26 392 26 384 V150 C26 124 48 118 48 96 V30 H46 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.8"/>
+</svg>

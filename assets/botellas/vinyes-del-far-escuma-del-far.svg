@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 400" width="120" height="400">
+  <defs>
+    <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#142012"/><stop offset="0.45" stop-color="#26381f"/><stop offset="1" stop-color="#142012"/></linearGradient>
+    <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="curve" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="0.25" stop-color="#000" stop-opacity="0"/><stop offset="0.75" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient>
+    <clipPath id="bc"><path d="M45 14 H75 V28 H73 V80 C73 132 102 150 102 200 V384 Q102 392 94 392 H26 Q18 392 18 384 V200 C18 150 47 132 47 80 V28 H45 Z"/></clipPath>
+    <clipPath id="lc"><rect x="23" y="236" width="74" height="110"/></clipPath>
+  </defs>
+  <path d="M45 14 H75 V28 H73 V80 C73 132 102 150 102 200 V384 Q102 392 94 392 H26 Q18 392 18 384 V200 C18 150 47 132 47 80 V28 H45 Z" fill="url(#glass)"/>
+  
+  <rect x="44" y="14" width="32" height="104" fill="#2f6b8a"/><rect x="44" y="108" width="32" height="3" fill="#d9c08a" opacity="0.8"/>
+  <g clip-path="url(#lc)"><rect x="23" y="236" width="74" height="110" fill="#f4f0e6"/><rect x="26" y="239" width="68" height="104" fill="none" stroke="#2f6b8a" stroke-width="1.2"/>
+      <rect x="28.5" y="241.5" width="63" height="99" fill="none" stroke="#2f6b8a" stroke-width="0.5"/>
+      <text x="60" y="264.6" font-family="Helvetica, Arial, sans-serif" font-size="5.2" letter-spacing="0.6" fill="#2f6b8a" text-anchor="middle">VINYES DEL FAR</text>
+      <text x="60" y="297.6" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="7.619047619047619" fill="#1f2b33" text-anchor="middle">Escuma del Far</text>
+      <text x="60" y="326.2" font-family="Helvetica, Arial, sans-serif" font-size="4.2" letter-spacing="0.4" fill="#1f2b33" text-anchor="middle">DO EMPORDÀ</text></g>
+    <rect x="23" y="236" width="74" height="110" fill="url(#curve)"/>
+  <rect x="29" y="126" width="5" height="256" fill="url(#shine)" clip-path="url(#bc)" opacity="0.7"/>
+  <path d="M45 14 H75 V28 H73 V80 C73 132 102 150 102 200 V384 Q102 392 94 392 H26 Q18 392 18 384 V200 C18 150 47 132 47 80 V28 H45 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.8"/>
+</svg>

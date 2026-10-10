@@ -1,0 +1,707 @@
+[
+ {
+  "id": "celler-pedra-blava-llicorella",
+  "bodega": "Celler Pedra Blava",
+  "vino": "Llicorella",
+  "do": "DOQ Priorat",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#efe6d6",
+   "ink": "#2a2220",
+   "accent": "#7a2e2a",
+   "capsule": "#5b1f1c",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "celler-pedra-blava-terrassa-vella",
+  "bodega": "Celler Pedra Blava",
+  "vino": "Terrassa Vella",
+  "do": "DOQ Priorat",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#efe6d6",
+   "ink": "#2a2220",
+   "accent": "#7a2e2a",
+   "capsule": "#5b1f1c",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "celler-pedra-blava-pedra-blava-blanc",
+  "bodega": "Celler Pedra Blava",
+  "vino": "Pedra Blava Blanc",
+  "do": "DOQ Priorat",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#efe6d6",
+   "ink": "#2a2220",
+   "accent": "#7a2e2a",
+   "capsule": "#5b1f1c",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "celler-pedra-blava-mula",
+  "bodega": "Celler Pedra Blava",
+  "vino": "Mula",
+  "do": "DOQ Priorat",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#efe6d6",
+   "ink": "#2a2220",
+   "accent": "#7a2e2a",
+   "capsule": "#5b1f1c",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "celler-pedra-blava-ranci-de-l-avia",
+  "bodega": "Celler Pedra Blava",
+  "vino": "Ranci de l'Àvia",
+  "do": "DOQ Priorat",
+  "tipo": "dulce",
+  "forma": "dulce",
+  "label": {
+   "paper": "#efe6d6",
+   "ink": "#2a2220",
+   "accent": "#7a2e2a",
+   "capsule": "#5b1f1c",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "vinyes-del-far-tramuntana",
+  "bodega": "Vinyes del Far",
+  "vino": "Tramuntana",
+  "do": "DO Empordà",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f4f0e6",
+   "ink": "#1f2b33",
+   "accent": "#2f6b8a",
+   "capsule": "#2f6b8a",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinyes-del-far-far-blanc",
+  "bodega": "Vinyes del Far",
+  "vino": "Far Blanc",
+  "do": "DO Empordà",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f4f0e6",
+   "ink": "#1f2b33",
+   "accent": "#2f6b8a",
+   "capsule": "#2f6b8a",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinyes-del-far-rosa-de-mar",
+  "bodega": "Vinyes del Far",
+  "vino": "Rosa de Mar",
+  "do": "DO Empordà",
+  "tipo": "rosado",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f4f0e6",
+   "ink": "#1f2b33",
+   "accent": "#2f6b8a",
+   "capsule": "#2f6b8a",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinyes-del-far-lledoner-negre",
+  "bodega": "Vinyes del Far",
+  "vino": "Lledoner Negre",
+  "do": "DO Empordà",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f4f0e6",
+   "ink": "#1f2b33",
+   "accent": "#2f6b8a",
+   "capsule": "#2f6b8a",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinyes-del-far-escuma-del-far",
+  "bodega": "Vinyes del Far",
+  "vino": "Escuma del Far",
+  "do": "DO Empordà",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f4f0e6",
+   "ink": "#1f2b33",
+   "accent": "#2f6b8a",
+   "capsule": "#2f6b8a",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "can-rovello-brut-nature-rovello",
+  "bodega": "Can Rovelló",
+  "vino": "Brut Nature Rovelló",
+  "do": "DO Penedès",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f2ede3",
+   "ink": "#26301f",
+   "accent": "#4f6b3a",
+   "capsule": "#c8a45a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "can-rovello-gran-rovello",
+  "bodega": "Can Rovelló",
+  "vino": "Gran Rovelló",
+  "do": "DO Penedès",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f2ede3",
+   "ink": "#26301f",
+   "accent": "#4f6b3a",
+   "capsule": "#c8a45a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "can-rovello-rosat-d-estiu",
+  "bodega": "Can Rovelló",
+  "vino": "Rosat d'Estiu",
+  "do": "DO Penedès",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f2ede3",
+   "ink": "#26301f",
+   "accent": "#4f6b3a",
+   "capsule": "#c8a45a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "can-rovello-xarel-lo-de-masia",
+  "bodega": "Can Rovelló",
+  "vino": "Xarel·lo de Masia",
+  "do": "DO Penedès",
+  "tipo": "blanco",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f2ede3",
+   "ink": "#26301f",
+   "accent": "#4f6b3a",
+   "capsule": "#c8a45a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "can-rovello-vinya-del-pou",
+  "bodega": "Can Rovelló",
+  "vino": "Vinya del Pou",
+  "do": "DO Penedès",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f2ede3",
+   "ink": "#26301f",
+   "accent": "#4f6b3a",
+   "capsule": "#c8a45a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "can-rovello-ancestral",
+  "bodega": "Can Rovelló",
+  "vino": "Ancestral",
+  "do": "DO Penedès",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f2ede3",
+   "ink": "#26301f",
+   "accent": "#4f6b3a",
+   "capsule": "#c8a45a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "bodega-altozano-viejo-altozano-roble",
+  "bodega": "Bodega Altozano Viejo",
+  "vino": "Altozano Roble",
+  "do": "DO Ribera del Duero",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#ece4d4",
+   "ink": "#1d1a17",
+   "accent": "#8a6d3b",
+   "capsule": "#1d1a17",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodega-altozano-viejo-altozano-crianza",
+  "bodega": "Bodega Altozano Viejo",
+  "vino": "Altozano Crianza",
+  "do": "DO Ribera del Duero",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#ece4d4",
+   "ink": "#1d1a17",
+   "accent": "#8a6d3b",
+   "capsule": "#1d1a17",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodega-altozano-viejo-altozano-reserva",
+  "bodega": "Bodega Altozano Viejo",
+  "vino": "Altozano Reserva",
+  "do": "DO Ribera del Duero",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#ece4d4",
+   "ink": "#1d1a17",
+   "accent": "#8a6d3b",
+   "capsule": "#1d1a17",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodega-altozano-viejo-paramo",
+  "bodega": "Bodega Altozano Viejo",
+  "vino": "Páramo",
+  "do": "DO Ribera del Duero",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#ece4d4",
+   "ink": "#1d1a17",
+   "accent": "#8a6d3b",
+   "capsule": "#1d1a17",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodega-altozano-viejo-lagrima-rosado",
+  "bodega": "Bodega Altozano Viejo",
+  "vino": "Lágrima Rosado",
+  "do": "DO Ribera del Duero",
+  "tipo": "rosado",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#ece4d4",
+   "ink": "#1d1a17",
+   "accent": "#8a6d3b",
+   "capsule": "#1d1a17",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "vinedos-del-cierzo-alto-cierzo-blanco",
+  "bodega": "Viñedos del Cierzo Alto",
+  "vino": "Cierzo Blanco",
+  "do": "DOCa Rioja",
+  "tipo": "blanco",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f1ebdf",
+   "ink": "#2b1d1d",
+   "accent": "#a33a2f",
+   "capsule": "#a33a2f",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinedos-del-cierzo-alto-cierzo-crianza",
+  "bodega": "Viñedos del Cierzo Alto",
+  "vino": "Cierzo Crianza",
+  "do": "DOCa Rioja",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f1ebdf",
+   "ink": "#2b1d1d",
+   "accent": "#a33a2f",
+   "capsule": "#a33a2f",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinedos-del-cierzo-alto-cierzo-gran-reserva",
+  "bodega": "Viñedos del Cierzo Alto",
+  "vino": "Cierzo Gran Reserva",
+  "do": "DOCa Rioja",
+  "tipo": "tinto",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f1ebdf",
+   "ink": "#2b1d1d",
+   "accent": "#a33a2f",
+   "capsule": "#a33a2f",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinedos-del-cierzo-alto-calado",
+  "bodega": "Viñedos del Cierzo Alto",
+  "vino": "Calado",
+  "do": "DOCa Rioja",
+  "tipo": "tinto",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f1ebdf",
+   "ink": "#2b1d1d",
+   "accent": "#a33a2f",
+   "capsule": "#a33a2f",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "vinedos-del-cierzo-alto-cierzo-rosado",
+  "bodega": "Viñedos del Cierzo Alto",
+  "vino": "Cierzo Rosado",
+  "do": "DOCa Rioja",
+  "tipo": "rosado",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f1ebdf",
+   "ink": "#2b1d1d",
+   "accent": "#a33a2f",
+   "capsule": "#a33a2f",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "adega-pedra-mol-pedra-mol",
+  "bodega": "Adega Pedra Mol",
+  "vino": "Pedra Mol",
+  "do": "DO Rías Baixas",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f3f1ea",
+   "ink": "#1b2a2a",
+   "accent": "#3f7f7a",
+   "capsule": "#3f7f7a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "adega-pedra-mol-pedra-mol-lias",
+  "bodega": "Adega Pedra Mol",
+  "vino": "Pedra Mol Lías",
+  "do": "DO Rías Baixas",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f3f1ea",
+   "ink": "#1b2a2a",
+   "accent": "#3f7f7a",
+   "capsule": "#3f7f7a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "adega-pedra-mol-ria-escura",
+  "bodega": "Adega Pedra Mol",
+  "vino": "Ría Escura",
+  "do": "DO Rías Baixas",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f3f1ea",
+   "ink": "#1b2a2a",
+   "accent": "#3f7f7a",
+   "capsule": "#3f7f7a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "adega-pedra-mol-tinto-de-parra",
+  "bodega": "Adega Pedra Mol",
+  "vino": "Tinto de Parra",
+  "do": "DO Rías Baixas",
+  "tipo": "tinto",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f3f1ea",
+   "ink": "#1b2a2a",
+   "accent": "#3f7f7a",
+   "capsule": "#3f7f7a",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "bodegas-albariza-norte-fino-albariza",
+  "bodega": "Bodegas Albariza Norte",
+  "vino": "Fino Albariza",
+  "do": "DO Jerez-Xérès-Sherry",
+  "tipo": "generoso",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f5ecd8",
+   "ink": "#2b2014",
+   "accent": "#9b7a2f",
+   "capsule": "#6b4f1d",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodegas-albariza-norte-manzanilla-levante",
+  "bodega": "Bodegas Albariza Norte",
+  "vino": "Manzanilla Levante",
+  "do": "DO Jerez-Xérès-Sherry",
+  "tipo": "generoso",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f5ecd8",
+   "ink": "#2b2014",
+   "accent": "#9b7a2f",
+   "capsule": "#6b4f1d",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodegas-albariza-norte-amontillado-viejo",
+  "bodega": "Bodegas Albariza Norte",
+  "vino": "Amontillado Viejo",
+  "do": "DO Jerez-Xérès-Sherry",
+  "tipo": "generoso",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f5ecd8",
+   "ink": "#2b2014",
+   "accent": "#9b7a2f",
+   "capsule": "#6b4f1d",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodegas-albariza-norte-oloroso-solera",
+  "bodega": "Bodegas Albariza Norte",
+  "vino": "Oloroso Solera",
+  "do": "DO Jerez-Xérès-Sherry",
+  "tipo": "generoso",
+  "forma": "bordelesa",
+  "label": {
+   "paper": "#f5ecd8",
+   "ink": "#2b2014",
+   "accent": "#9b7a2f",
+   "capsule": "#6b4f1d",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "bodegas-albariza-norte-px-soleado",
+  "bodega": "Bodegas Albariza Norte",
+  "vino": "PX Soleado",
+  "do": "DO Jerez-Xérès-Sherry",
+  "tipo": "dulce",
+  "forma": "dulce",
+  "label": {
+   "paper": "#f5ecd8",
+   "ink": "#2b2014",
+   "accent": "#9b7a2f",
+   "capsule": "#6b4f1d",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "domaine-des-trois-clochers-bourgogne-blanc",
+  "bodega": "Domaine des Trois Clochers",
+  "vino": "Bourgogne Blanc",
+  "do": "AOC Bourgogne",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f0e9db",
+   "ink": "#1f1b26",
+   "accent": "#5a3e7a",
+   "capsule": "#7a1e2e",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "domaine-des-trois-clochers-cote-de-beaune-villages",
+  "bodega": "Domaine des Trois Clochers",
+  "vino": "Côte de Beaune Villages",
+  "do": "AOC Bourgogne",
+  "tipo": "tinto",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f0e9db",
+   "ink": "#1f1b26",
+   "accent": "#5a3e7a",
+   "capsule": "#7a1e2e",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "domaine-des-trois-clochers-les-clochers-1er-cru",
+  "bodega": "Domaine des Trois Clochers",
+  "vino": "Les Clochers 1er Cru",
+  "do": "AOC Bourgogne",
+  "tipo": "blanco",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f0e9db",
+   "ink": "#1f1b26",
+   "accent": "#5a3e7a",
+   "capsule": "#7a1e2e",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "domaine-des-trois-clochers-pinot-des-trois",
+  "bodega": "Domaine des Trois Clochers",
+  "vino": "Pinot des Trois",
+  "do": "AOC Bourgogne",
+  "tipo": "tinto",
+  "forma": "borgonona",
+  "label": {
+   "paper": "#f0e9db",
+   "ink": "#1f1b26",
+   "accent": "#5a3e7a",
+   "capsule": "#7a1e2e",
+   "layout": "frame"
+  }
+ },
+ {
+  "id": "maison-lefevre-aubrac-brut-tradition",
+  "bodega": "Maison Lefèvre-Aubrac",
+  "vino": "Brut Tradition",
+  "do": "AOC Champagne",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f6f1e6",
+   "ink": "#14161c",
+   "accent": "#b08d4a",
+   "capsule": "#14161c",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "maison-lefevre-aubrac-blanc-de-blancs",
+  "bodega": "Maison Lefèvre-Aubrac",
+  "vino": "Blanc de Blancs",
+  "do": "AOC Champagne",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f6f1e6",
+   "ink": "#14161c",
+   "accent": "#b08d4a",
+   "capsule": "#14161c",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "maison-lefevre-aubrac-rose-de-saignee",
+  "bodega": "Maison Lefèvre-Aubrac",
+  "vino": "Rosé de Saignée",
+  "do": "AOC Champagne",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f6f1e6",
+   "ink": "#14161c",
+   "accent": "#b08d4a",
+   "capsule": "#14161c",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "maison-lefevre-aubrac-extra-brut-millesime",
+  "bodega": "Maison Lefèvre-Aubrac",
+  "vino": "Extra Brut Millésime",
+  "do": "AOC Champagne",
+  "tipo": "espumoso",
+  "forma": "champan",
+  "label": {
+   "paper": "#f6f1e6",
+   "ink": "#14161c",
+   "accent": "#b08d4a",
+   "capsule": "#14161c",
+   "layout": "center"
+  }
+ },
+ {
+  "id": "weingut-steinwalder-riesling-trocken",
+  "bodega": "Weingut Steinwalder",
+  "vino": "Riesling Trocken",
+  "do": "Mosel",
+  "tipo": "blanco",
+  "forma": "flauta",
+  "label": {
+   "paper": "#f4f2ec",
+   "ink": "#1c1f24",
+   "accent": "#2e5a87",
+   "capsule": "#c9b27a",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "weingut-steinwalder-schieferhang",
+  "bodega": "Weingut Steinwalder",
+  "vino": "Schieferhang",
+  "do": "Mosel",
+  "tipo": "blanco",
+  "forma": "flauta",
+  "label": {
+   "paper": "#f4f2ec",
+   "ink": "#1c1f24",
+   "accent": "#2e5a87",
+   "capsule": "#c9b27a",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "weingut-steinwalder-spatlese",
+  "bodega": "Weingut Steinwalder",
+  "vino": "Spätlese",
+  "do": "Mosel",
+  "tipo": "dulce",
+  "forma": "flauta",
+  "label": {
+   "paper": "#f4f2ec",
+   "ink": "#1c1f24",
+   "accent": "#2e5a87",
+   "capsule": "#c9b27a",
+   "layout": "band"
+  }
+ },
+ {
+  "id": "weingut-steinwalder-beerenauslese",
+  "bodega": "Weingut Steinwalder",
+  "vino": "Beerenauslese",
+  "do": "Mosel",
+  "tipo": "dulce",
+  "forma": "dulce",
+  "label": {
+   "paper": "#f4f2ec",
+   "ink": "#1c1f24",
+   "accent": "#2e5a87",
+   "capsule": "#c9b27a",
+   "layout": "band"
+  }
+ }
+]

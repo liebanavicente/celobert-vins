@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Asistente de carta · Celobert Vins (portfolio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="carta-page">
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top" id="top"></header>
+
+  <main>
+    <section class="cc-hero">
+      <div class="wrap">
+        <p class="kicker">Para el equipo comercial · prototipo</p>
+        <h1>Asistente de carta <em>para comerciales</em></h1>
+        <p class="lead">En la visita al restaurante: marca su cocina y lo que ya tiene en carta. En un minuto ves qué estilos le faltan y qué vinos del catálogo los cubren, y le dejas la propuesta preparada. El argumento lo pones tú; esto te da los datos.</p>
+      </div>
+    </section>
+
+    <section class="wrap cc-tool">
+      <form class="cc-form" id="cc-form" autocomplete="off">
+        <fieldset class="cc-step">
+          <legend><span>1</span> La cocina del cliente</legend>
+          <div class="cc-chips" id="cc-cocina" role="radiogroup" aria-label="Tipo de cocina"></div>
+        </fieldset>
+
+        <fieldset class="cc-step">
+          <legend><span>2</span> Su carta</legend>
+          <label class="cc-row">Referencias que quiere tener en total
+            <select id="cc-size"><option value="12">12 · carta corta</option><option value="24" selected>24 · carta media</option><option value="40">40 · carta amplia</option></select>
+          </label>
+          <label class="cc-row">Cliente (opcional)
+            <input id="cc-cliente" placeholder="Nombre del restaurante" />
+          </label>
+          <label class="cc-row">Gama de precio del local
+            <select id="cc-gama"><option value="todas">Todas</option><option value="entrada,media" selected>Entrada y media</option><option value="entrada">Solo entrada</option><option value="media,alta">Media y alta</option><option value="alta">Alta</option></select>
+          </label>
+          <label class="cc-row">Origen que prefiere
+            <select id="cc-origen"><option value="cerca">Cercanía (Catalunya)</option><option value="espana" selected>España</option><option value="mundo">Internacional</option><option value="todo">Me da igual</option></select>
+          </label>
+          <p class="cc-hint">¿Cuántas referencias tiene ya de cada estilo?</p>
+          <div class="cc-have" id="cc-have"></div>
+        </fieldset>
+      </form>
+
+      <div class="cc-result" id="cc-result" aria-live="polite"></div>
+    </section>
+
+    <section class="wrap cc-notes">
+      <h2>Cómo funciona este prototipo</h2>
+      <ul>
+        <li><b>Datos de cada vino.</b> Celobert Vins es ficticia: bodegas, vinos, estilos y gamas son inventados para este portfolio. Las zonas son reales. <span id="cc-pend"></span></li>
+        <li><b>Reparto recomendado.</b> Es orientativo, con criterios generales de sumillería por tipo de cocina. En una distribuidora real lo ajustaría su equipo.</li>
+        <li><b>Gama de precio.</b> Cada vino lleva su gama (entrada, media, alta) para que la propuesta encaje con el ticket del local. En una distribuidora real saldría de su tarifa, y se podrían sumar sus datos de ventas.</li>
+      </ul>
+    </section>
+  </main>
+
+  <button type="button" class="order-fab" id="cc-fab" hidden>Mi selección <b id="cc-n">0</b></button>
+  <footer class="foot" id="contacto">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+
+  <script src="catalogo-data.js"></script>
+  <script src="carta-data.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="carta.js"></script>
+</body>
+</html>

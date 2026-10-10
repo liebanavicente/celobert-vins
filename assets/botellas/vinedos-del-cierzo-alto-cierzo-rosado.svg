@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 400" width="120" height="400">
+  <defs>
+    <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#d9c9c4"/><stop offset="0.45" stop-color="#efe7e3"/><stop offset="1" stop-color="#d9c9c4"/></linearGradient>
+    <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="curve" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="0.25" stop-color="#000" stop-opacity="0"/><stop offset="0.75" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient>
+    <clipPath id="bc"><path d="M46 18 H74 V30 H72 V96 C72 118 94 124 94 150 V384 Q94 392 86 392 H34 Q26 392 26 384 V150 C26 124 48 118 48 96 V30 H46 Z"/></clipPath>
+    <clipPath id="lc"><rect x="30" y="214" width="60" height="120"/></clipPath>
+  </defs>
+  <path d="M46 18 H74 V30 H72 V96 C72 118 94 124 94 150 V384 Q94 392 86 392 H34 Q26 392 26 384 V150 C26 124 48 118 48 96 V30 H46 Z" fill="url(#glass)"/>
+  <rect x="0" y="144" width="120" height="400" fill="#f0a69a" opacity="0.75" clip-path="url(#bc)"/>
+  <rect x="46" y="18" width="28" height="62" fill="#a33a2f"/>
+  <g clip-path="url(#lc)"><rect x="30" y="214" width="60" height="120" fill="#f1ebdf"/><rect x="33" y="217" width="54" height="114" fill="none" stroke="#a33a2f" stroke-width="1.2"/>
+      <rect x="35.5" y="219.5" width="49" height="109" fill="none" stroke="#a33a2f" stroke-width="0.5"/>
+      <text x="60" y="245.2" font-family="Helvetica, Arial, sans-serif" font-size="2.7173913043478257" letter-spacing="0.6" fill="#a33a2f" text-anchor="middle">VIÑEDOS DEL CIERZO ALTO</text>
+      <text x="60" y="281.2" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="6.410256410256411" fill="#2b1d1d" text-anchor="middle">Cierzo Rosado</text>
+      <text x="60" y="312.4" font-family="Helvetica, Arial, sans-serif" font-size="4.2" letter-spacing="0.4" fill="#2b1d1d" text-anchor="middle">DOCA RIOJA</text></g>
+    <rect x="30" y="214" width="60" height="120" fill="url(#curve)"/>
+  <rect x="36" y="88" width="5" height="294" fill="url(#shine)" clip-path="url(#bc)" opacity="0.7"/>
+  <path d="M46 18 H74 V30 H72 V96 C72 118 94 124 94 150 V384 Q94 392 86 392 H34 Q26 392 26 384 V150 C26 124 48 118 48 96 V30 H46 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.8"/>
+</svg>

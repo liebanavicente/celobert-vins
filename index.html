@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Celobert Vins · distribuidora de vinos (portfolio)</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Italiana&family=Playfair+Display+SC:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    // antes de pintar: lo que va a entrar animado no parpadea (si GSAP no carga en 4 s, se enseña todo)
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim','js-intro');
+    setTimeout(() => { if (!window.gsap) document.documentElement.classList.remove('js-anim', 'js-intro'); }, 4000);
+  </script>
+</head>
+<body>
+  <!-- entrada: el mandala se despliega como un caleidoscopio y vuela a la cabecera (anim.js) -->
+  <div id="intro" aria-hidden="true"><div class="intro-mark"></div><div class="intro-word">celobert<small>vins</small></div><button type="button" class="intro-skip">Saltar</button></div>
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="Celobert Vins"><span class="brand-mark" data-mandala></span><span class="brand-word">celobert<small>vins</small></span></a>
+      <nav class="nav">
+        <a href="index.html#destacados">Destacados</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="index.html#profesionales">Profesionales</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="pro-btn" href="#" data-platform>Acceso clientes</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- I. Portada: el caleidoscopio con las fotos de sus bodegas -->
+    <section class="hero ed-hero">
+      <div class="wrap ed-hero-grid">
+        <div class="ed-hero-copy">
+          <p class="kicker">Distribuidora de vinos de autor · Barcelona</p>
+          <h1>Vinos con historia, <em>contados como se merecen.</em></h1>
+          <p class="lead">Cada vino con su ficha, su historia y su vídeo. Y material listo para que vuestros clientes los conozcan.</p>
+          <div class="btns"><a class="btn solid" href="catalogo.html">Ver el catálogo</a><a class="btn ghost" href="#destacados">Ver los destacados</a></div>
+        </div>
+        <figure class="ed-kaleido">
+          <div class="ed-mandala" data-mandala aria-label="Logo de Celobert: una baldosa de patio"></div>
+          <svg class="ed-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0" /></defs><text><textPath href="#ring">10 BODEGAS · 47 VINOS · BARCELONA · GIRONA · TARRAGONA · MADRID ·</textPath></text></svg>
+          
+        </figure>
+      </div>
+      <nav class="ed-ribbon" aria-label="Bodegas"><div class="ed-ribbon-track" id="ribbon"></div></nav>
+    </section>
+
+    <!-- II. La bodega: una pared de botellas en movimiento -->
+    <section class="ed-wall" id="bodega">
+      <div class="wrap ed-wall-head">
+        <p class="ed-num">II</p>
+        <h2>47 botellas. <em>Una sola mirada.</em></h2>
+        <a class="btn" href="catalogo.html">Abrir el catálogo vivo</a>
+      </div>
+      <div class="ed-shelf"><div class="ed-shelf-track" id="shelf-a"></div></div>
+      <div class="ed-shelf reverse"><div class="ed-shelf-track" id="shelf-b"></div></div>
+    </section>
+
+    <!-- III. Destacados: los vinos con vídeo, en una sala de proyección (destacados.js + app.js) -->
+    <section class="ed-star" id="destacados" hidden>
+      <span id="vinos" class="anchor-alias" aria-hidden="true"></span>
+      <div class="wrap">
+        <div class="ed-star-head"><p class="ed-num">III</p><h2>Destacados, <em>en movimiento</em></h2><p class="ed-star-sub">Cada vino con su vídeo y su estilo. Toca uno para verlo.</p></div>
+        <div class="ed-star-grid">
+          <div class="ed-star-media">
+            <video muted playsinline preload="metadata"></video>
+            <button class="ed-star-sound" type="button" aria-label="Activar el sonido">Sonido</button>
+          </div>
+          <div class="ed-star-text" aria-live="polite"></div>
+        </div>
+        <div class="ed-star-rail" role="tablist" aria-label="Vinos destacados"></div>
+      </div>
+    </section>
+
+    <!-- IV. Zonas: un índice -->
+    <section class="ed-index" id="zonas">
+      <div class="wrap">
+        <div class="ed-chapter"><p class="ed-num">IV</p><h2>Un catálogo vivo <em>por zona</em></h2></div>
+        <ol class="ed-zones">
+          <li><a href="catalogo.html?zona=barcelona"><span class="z-n">01</span><span class="z-name">Barcelona</span><span class="z-go">Ver catálogo →</span></a></li>
+          <li><a href="catalogo.html?zona=girona"><span class="z-n">02</span><span class="z-name">Girona</span><span class="z-go">Ver catálogo →</span></a></li>
+          <li><a href="catalogo.html?zona=tarragona"><span class="z-n">03</span><span class="z-name">Tarragona</span><span class="z-go">Ver catálogo →</span></a></li>
+          <li><a href="catalogo.html?zona=madrid"><span class="z-n">04</span><span class="z-name">Madrid</span><span class="z-go">Ver catálogo →</span></a></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- V. Profesionales -->
+    <section class="ed-pro" id="profesionales">
+      <div class="wrap ed-pro-grid">
+        <div>
+          <p class="ed-num light">V</p>
+          <h2>Vendemos el vino <em>y os ayudamos a venderlo</em></h2>
+          <div class="btns"><a class="btn solid light" href="carta.html">Asistente de carta</a><a class="btn ghost light" href="vino.html?id=celler-pedra-blava-terrassa-vella">Ver un ejemplo</a><a class="btn ghost light" href="#" data-platform>Acceso clientes</a></div>
+        </div>
+        <ol class="ed-pro-list">
+          <li><b>Asistente de carta para comerciales</b><span>En la visita: qué estilos le faltan a la carta del cliente y con qué vinos cubrirlos.</span></li>
+          <li><b>Ficha de cada vino</b><span>Siempre al día, con los datos de la bodega.</span></li>
+          <li><b>Su vídeo, listo para publicar</b><span>En vertical y en 4:5, para vuestras redes y las del cliente.</span></li>
+          <li><b>Fotos de botella</b><span>Para la carta y la web del restaurante.</span></li>
+          <li><b>Catálogo de vuestra zona</b><span>Conectado con vuestra plataforma de pedidos.</span></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+  <section class="section" id="contacto">
+    <div class="wrap grid-2">
+      <div>
+        <p class="kicker">Contacto</p>
+        <h2 style="font-size:clamp(30px,3.6vw,44px)">¿Restaurante, bar o tienda?</h2>
+        <p class="lead" style="margin-top:14px">Te ponemos en contacto con el comercial de tu zona para precios, disponibilidad y catas.</p>
+      </div>
+      <form class="zone" onsubmit="event.preventDefault(); this.querySelector('p.ok').hidden=false;">
+        <p style="margin:0 0 10px"><input required placeholder="Nombre del local" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit" /></p>
+        <p style="margin:0 0 10px"><input required placeholder="Correo o teléfono" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit" /></p>
+        <p style="margin:0 0 14px"><select style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit"><option>Barcelona</option><option>Girona</option><option>Tarragona</option><option>Madrid</option></select></p>
+        <button class="btn solid" type="submit">Quiero que me llaméis</button>
+        <p class="ok" hidden style="margin:14px 0 0;color:var(--olive);font-weight:600">Prototipo: aquí la petición llegaría al comercial de tu zona.</p>
+      </form>
+    </div>
+  </section>
+  <footer class="foot">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+  <script src="catalogo-data.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="data.js"></script>
+  <script src="destacados.js"></script>
+  <script src="app.js"></script>
+  <!-- GSAP en local: la propuesta funciona sin internet -->
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="anim.js"></script>
+</body>
+</html>

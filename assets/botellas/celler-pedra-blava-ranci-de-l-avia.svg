@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 400" width="120" height="400">
+  <defs>
+    <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#1f140a"/><stop offset="0.45" stop-color="#3b2614"/><stop offset="1" stop-color="#1f140a"/></linearGradient>
+    <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="curve" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="0.25" stop-color="#000" stop-opacity="0"/><stop offset="0.75" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient>
+    <clipPath id="bc"><path d="M49 120 H71 V130 H69 V176 C69 192 86 198 86 216 V384 Q86 392 79 392 H41 Q34 392 34 384 V216 C34 198 51 192 51 176 V130 H49 Z"/></clipPath>
+    <clipPath id="lc"><rect x="37" y="266" width="46" height="92"/></clipPath>
+  </defs>
+  <path d="M49 120 H71 V130 H69 V176 C69 192 86 198 86 216 V384 Q86 392 79 392 H41 Q34 392 34 384 V216 C34 198 51 192 51 176 V130 H49 Z" fill="url(#glass)"/>
+  
+  <rect x="49" y="120" width="22" height="40" fill="#5b1f1c"/>
+  <g clip-path="url(#lc)"><rect x="37" y="266" width="46" height="92" fill="#efe6d6"/><rect x="37" y="266" width="46" height="20.24" fill="#7a2e2a"/>
+      <text x="60" y="278.88" font-family="Helvetica, Arial, sans-serif" font-size="2.5" font-weight="700" letter-spacing="0.6" fill="#efe6d6" text-anchor="middle">CELLER PEDRA BLAVA</text>
+      <text x="60" y="317.52" font-family="Georgia, 'Times New Roman', serif" font-size="4" fill="#2a2220" text-anchor="middle">Ranci de l&#39;Àvia</text>
+      <line x1="48.5" x2="71.5" y1="330.4" y2="330.4" stroke="#7a2e2a" stroke-width="0.8"/>
+      <text x="60" y="343.28" font-family="Helvetica, Arial, sans-serif" font-size="4.195804195804196" letter-spacing="0.4" fill="#2a2220" text-anchor="middle">DOQ PRIORAT</text></g>
+    <rect x="37" y="266" width="46" height="92" fill="url(#curve)"/>
+  <rect x="43" y="168" width="5" height="214" fill="url(#shine)" clip-path="url(#bc)" opacity="0.7"/>
+  <path d="M49 120 H71 V130 H69 V176 C69 192 86 198 86 216 V384 Q86 392 79 392 H41 Q34 392 34 384 V216 C34 198 51 192 51 176 V130 H49 Z" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.8"/>
+</svg>
