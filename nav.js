@@ -14,9 +14,9 @@
   const LINKS = [
     ["I", "Destacados", "index.html#destacados", page === "vino.html"],
     ["II", "Catálogo", "catalogo.html", page === "catalogo.html", true],
-    ["III", "Buscador", "buscador.html", page === "buscador.html"],
-    ["IV", "Profesionales", "index.html#profesionales"],
-    ["V", "Contacto", "#contacto"],
+    ["III", "Bodegas", "bodegas.html", page === "bodegas.html" || page === "bodega.html"],
+    ["IV", "Buscador", "buscador.html", page === "buscador.html"],
+    ["V", "Profesionales", "index.html#profesionales"],
   ];
 
   header.innerHTML = `
@@ -38,7 +38,7 @@
                 <button class="btn solid" type="submit">Buscar en el catálogo</button>
                 <p class="mega-note">${C.length} bodegas · ${C.reduce((n, w) => n + w.wines.length, 0)} vinos</p>
               </form>
-              ${pick ? `<a class="mega-pick" href="catalogo.html?bodega=${encodeURIComponent(pick.id)}">
+              ${pick ? `<a class="mega-pick" href="bodega.html?id=${encodeURIComponent(pick.id)}">
                 ${pick.photo ? `<img src="${pick.photo}" alt="" loading="lazy" />` : ""}
                 <span class="mega-k">Bodega destacada</span><b>${esc(pick.name)}</b><small>${esc(pick.do)}</small></a>` : ""}
             </div>` : ""}

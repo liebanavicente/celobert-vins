@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Bodegas · Celobert Vins (portfolio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bd-page">
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top" id="top"></header>
+
+  <main>
+    <section class="bd-index-hero wrap">
+      <p class="kicker">Las bodegas de la casa</p>
+      <h1><span id="bd-total">44</span> bodegas, <em>cada una con su historia</em></h1>
+      <p class="lead">Del Priorat a la Mosela, de Jerez a Champagne. Quién hace cada vino, dónde y cómo. Bodegas ficticias, zonas reales.</p>
+      <div class="bd-filters">
+        <div class="bd-chips" id="bd-paises" role="group" aria-label="País"></div>
+        <div class="bd-filter-row">
+          <label class="bd-q"><span class="sr">Buscar una bodega</span><input type="search" id="bd-q" placeholder="Buscar una bodega o una zona…" autocomplete="off" /></label>
+          <select id="bd-zona" aria-label="Zona de reparto"></select>
+          <span class="bd-count" id="bd-count" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+    <div class="wrap" id="bd-grid"></div>
+  </main>
+  <footer class="foot" id="contacto">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+
+  <script src="catalogo-data.js"></script>
+  <script src="carta-data.js"></script>
+  <script src="fichas.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="bodegas.js"></script>
+</body>
+</html>

@@ -70,7 +70,7 @@
       if (i && k === styleOf[i - 1]) k = (k + 1) % 6;
       styleOf.push(k);
     });
-    const names = (copy) => R.map((w, i) => `<a class="r${styleOf[i]}" href="catalogo.html?bodega=${encodeURIComponent(w.id)}"${copy ? ' tabindex="-1"' : ""}>${esc(w.name)}</a><i>${i % 3 === 2 ? "◆" : "✦"}</i>`).join("");
+    const names = (copy) => R.map((w, i) => `<a class="r${styleOf[i]}" href="bodega.html?id=${encodeURIComponent(w.id)}"${copy ? ' tabindex="-1"' : ""}>${esc(w.name)}</a><i>${i % 3 === 2 ? "◆" : "✦"}</i>`).join("");
     $("ribbon").innerHTML = `<span class="rg">${names(false)}</span><span class="rg" aria-hidden="true">${names(true)}</span>`;
     $("ribbon").style.animationDuration = `${R.length * 2.2}s`;
   }
@@ -189,7 +189,7 @@
           <div class="chips">${[...(x.tech && x.tech.vintage ? [/^\d/.test(x.tech.vintage) ? `Añada ${x.tech.vintage}` : x.tech.vintage.replace(/^./, (c) => c.toUpperCase())] : []), b.country, fmt, ...zones].map((c) => `<span class="chip">${esc(c)}</span>`).join("")}</div>
           <div class="btns">
             <a class="btn solid" href="#" data-platform>Pedir en la plataforma</a>
-            <a class="btn" href="catalogo.html?bodega=${encodeURIComponent(b.id)}">Toda la bodega en el catálogo</a>
+            <a class="btn" href="bodega.html?id=${encodeURIComponent(b.id)}">La bodega</a>
             ${x.video ? `<a class="btn" href="#material">▶ Ver su vídeo</a>` : ""}
             ${b.reel ? `<a class="btn" href="catalogo.html?reel=${encodeURIComponent(b.id)}">▶ Reel de la bodega</a>` : ""}
           </div>

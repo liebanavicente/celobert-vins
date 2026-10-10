@@ -11,6 +11,7 @@ bodega real es casual.
   cinta de bodegas con tipografías distintas, estanterías de botellas en movimiento y sección de
   destacados con vídeo.
 - **Catálogo vivo** por zona, con buscador, filtros y «Mi selección» para hacer el pedido.
+- **Bodegas**: índice por país con filtros y una ficha por bodega (historia, datos y sus vinos por estilo).
 - **Ficha de cada vino** con sus datos y los demás vinos de la bodega.
 - **Buscador avanzado** con filtros combinables (tipo, gama de precio, zona, país, denominación,
   elaborador, uva, formato) y contadores en vivo; la búsqueda queda en el enlace.

@@ -66,7 +66,7 @@
         <article class="winery" data-winery="${esc(w.id)}" data-flip-id="w-${esc(w.id)}">
           <header class="winery-head">
             ${w.photo ? `<span class="wphoto" style="background-image:url('${w.photo}')"></span>` : `<span class="wphoto empty"></span>`}
-            <span class="wtext"><b>${esc(w.name)}</b><small>${esc(w.do)} · ${esc(w.country)}</small>${w.summary ? `<em class="wsum">${esc(w.summary)}</em>` : ""}</span>
+            <span class="wtext"><b><a class="wlink" href="bodega.html?id=${encodeURIComponent(w.id)}">${esc(w.name)}</a></b><small>${esc(w.do)} · ${esc(w.country)}</small>${w.summary ? `<em class="wsum">${esc(w.summary)}</em>` : ""}</span>
             ${w.reel ? `<button type="button" class="reel-btn" data-reel="${esc(w.id)}"><span>▶</span> Reel de la bodega</button>` : ""}
             <span class="wcount"><span class="n">${w.wines.length}</span> vinos</span>
           </header>
