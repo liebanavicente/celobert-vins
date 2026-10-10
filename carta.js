@@ -83,7 +83,7 @@
     $("cc-fab").hidden = n === 0;
     $("cc-fab").classList.toggle("has", n > 0);
   }
-  $("cc-fab").addEventListener("click", () => (location.href = "catalogo.html?seleccion=1"));
+  $("cc-fab").addEventListener("click", () => (location.href = "propuesta.html"));
 
   // ---------- propuesta ----------
   function suggest(tipo, n, pref, excl = new Set()) {
@@ -157,7 +157,7 @@
         ${bars}
       </div>
       ${blocks}
-      <div class="cc-all">${allIds.length ? `<button type="button" class="btn solid" id="cc-add-all">Añadir las ${allIds.length} a la propuesta</button>` : ""}${inProp.length || allIds.length ? `<button type="button" class="btn" id="cc-share">Compartir la propuesta</button>` : ""}${inProp.length ? `<a class="btn" href="catalogo.html?seleccion=1">Ver la propuesta (${inProp.length})</a>` : ""}</div>`;
+      <div class="cc-all">${allIds.length ? `<button type="button" class="btn solid" id="cc-add-all">Añadir las ${allIds.length} a la propuesta</button>` : ""}${inProp.length || allIds.length ? `<button type="button" class="btn" id="cc-share">Compartir la propuesta</button>` : ""}${inProp.length ? `<a class="btn" href="propuesta.html">Ver la propuesta visual (${inProp.length})</a>` : ""}</div>`;
   }
 
   $("cc-result").addEventListener("click", (e) => {

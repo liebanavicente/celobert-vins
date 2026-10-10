@@ -14,7 +14,7 @@
   const LINKS = [
     ["I", "Destacados", "index.html#destacados", page === "vino.html"],
     ["II", "Catálogo", "catalogo.html", page === "catalogo.html", true],
-    ["III", "Zonas", "index.html#zonas"],
+    ["III", "Buscador", "buscador.html", page === "buscador.html"],
     ["IV", "Profesionales", "index.html#profesionales"],
     ["V", "Contacto", "#contacto"],
   ];
@@ -32,7 +32,7 @@
                 <p class="mega-k">Catálogo por zona</p>
                 ${ZONES.map((z) => `<a href="catalogo.html?zona=${z.toLowerCase()}"><span>${z}</span><em>${count(z) || ""} vinos</em></a>`).join("")}
               </div>
-              <form class="mega-search" action="catalogo.html">
+              <form class="mega-search" action="buscador.html">
                 <p class="mega-k">Buscar</p>
                 <label><span class="sr">Buscar un vino o una bodega</span><input name="q" placeholder="Un vino, una bodega, una zona…" /></label>
                 <button class="btn solid" type="submit">Buscar en el catálogo</button>
@@ -60,7 +60,7 @@
     <nav class="menu-links" aria-label="Menú">
       ${LINKS.map(([n, t, h]) => `<a href="${h}"><sup>${n}</sup>${t}</a>`).join("")}
     </nav>
-    <form class="menu-search" action="catalogo.html"><label><span class="sr">Buscar</span><input name="q" placeholder="Buscar un vino o una bodega" /></label></form>
+    <form class="menu-search" action="buscador.html"><label><span class="sr">Buscar</span><input name="q" placeholder="Buscar un vino o una bodega" /></label></form>
     <div class="menu-zones">${ZONES.map((z) => `<a href="catalogo.html?zona=${z.toLowerCase()}">${z}<em>${count(z) || ""}</em></a>`).join("")}</div>
     <div class="menu-end"><a class="btn solid light" href="#" data-platform>Acceso clientes</a><a class="menu-mail" href="#contacto">Contacto</a></div>`;
   document.body.append(menu);

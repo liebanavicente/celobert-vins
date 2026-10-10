@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Propuesta de vinos · Celobert Vins (portfolio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="prop-page">
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top" id="top"></header>
+
+  <main>
+    <section class="pp-hero wrap pp-edit-only">
+      <p class="kicker">Para el equipo comercial · prototipo</p>
+      <h1>Propuestas <em>que se miran</em></h1>
+      <p class="lead">Elige los vinos, escribe para quién es y deja una nota en cada uno. Sale una propuesta con la imagen de Celobert, lista para enviar en PDF o por enlace.</p>
+    </section>
+
+    <section class="pp-layout wrap" id="pp-layout">
+      <aside class="pp-editor pp-edit-only" aria-label="Editor de la propuesta">
+        <fieldset class="cc-step">
+          <legend><span>1</span> Para quién</legend>
+          <label class="cc-row">Cliente<input id="pp-cliente" placeholder="Restaurante, tienda o persona" /></label>
+          <label class="cc-row">Comercial<input id="pp-comercial" placeholder="Tu nombre" /></label>
+          <label class="cc-row">Fecha<input id="pp-fecha" type="date" /></label>
+          <label class="cc-row">Mensaje<textarea id="pp-intro" rows="4"></textarea></label>
+          <div class="cc-row">Portada
+            <div class="pp-themes" id="pp-themes" role="radiogroup" aria-label="Estilo de portada">
+              <button type="button" role="radio" data-t="noche" class="pp-theme t-noche" aria-label="Noche de patio"></button>
+              <button type="button" role="radio" data-t="lino" class="pp-theme t-lino" aria-label="Cal"></button>
+              <button type="button" role="radio" data-t="oliva" class="pp-theme t-oliva" aria-label="Verde patio"></button>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="cc-step">
+          <legend><span>2</span> Los vinos</legend>
+          <label class="pp-find"><span class="sr">Añadir un vino</span><input id="pp-find" placeholder="Añadir un vino: nombre o bodega…" autocomplete="off" /></label>
+          <div class="pp-sugg" id="pp-sugg"></div>
+          <ol class="pp-list" id="pp-list"></ol>
+          <p class="cc-hint" id="pp-empty-hint">Aún no hay vinos. Añádelos aquí, desde el <a href="buscador.html">buscador</a> o desde el <a href="carta.html">asistente de carta</a>.</p>
+        </fieldset>
+        <div class="pp-actions">
+          <button type="button" class="btn solid" id="pp-print">Guardar en PDF</button>
+          <button type="button" class="btn" id="pp-link">Copiar enlace</button>
+          <button type="button" class="btn ghost" id="pp-reset">Empezar otra</button>
+        </div>
+      </aside>
+
+      <div class="pp-doc-wrap">
+        <div class="pp-view-bar pp-view-only"><span>Propuesta de vinos · Celobert Vins</span><button type="button" class="btn solid" id="pp-print2">Guardar en PDF</button></div>
+        <article class="pp-doc" id="pp-doc" aria-live="polite"></article>
+      </div>
+    </section>
+  </main>
+  <footer class="foot" id="contacto">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+
+  <script src="catalogo-data.js"></script>
+  <script src="carta-data.js"></script>
+  <script src="fichas.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="assets/vendor/html2canvas.min.js"></script>
+  <script src="assets/vendor/jspdf.umd.min.js"></script>
+  <script src="propuesta.js"></script>
+</body>
+</html>

@@ -12,6 +12,11 @@ bodega real es casual.
   destacados con vídeo.
 - **Catálogo vivo** por zona, con buscador, filtros y «Mi selección» para hacer el pedido.
 - **Ficha de cada vino** con sus datos y los demás vinos de la bodega.
+- **Buscador avanzado** con filtros combinables (tipo, gama de precio, zona, país, denominación,
+  elaborador, uva, formato) y contadores en vivo; la búsqueda queda en el enlace.
+- **Propuestas visuales para clientes**: el comercial elige vinos, cantidades, precios y una nota
+  por vino; sale un documento con la imagen de la marca (pedido completo en la primera página,
+  una ficha por vino y cierre), que se descarga en PDF A4 o se comparte por enlace.
 - **Asistente de carta para comerciales**: según la cocina del restaurante, el tamaño de su carta,
   su gama de precio y lo que ya tiene, propone qué estilos le faltan y con qué vinos cubrirlos, y
   genera un texto para compartir con el cliente.
@@ -19,7 +24,8 @@ bodega real es casual.
 
 ## Cómo está hecho
 
-HTML, CSS y JavaScript sin frameworks, con GSAP para las animaciones.
+HTML, CSS y JavaScript sin frameworks, con GSAP para las animaciones y html2canvas + jsPDF para
+generar el PDF de las propuestas en el propio navegador.
 
 ```bash
 node tools/datos.mjs      # genera catalogo-data.js y carta-data.js a partir de los datos inventados

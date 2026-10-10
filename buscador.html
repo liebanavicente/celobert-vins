@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Buscador · Celobert Vins (portfolio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bs-page">
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top" id="top"></header>
+
+  <main>
+    <section class="bs-hero wrap">
+      <p class="kicker">Buscador avanzado · todo el catálogo</p>
+      <h1>Encuentra <em>el vino</em></h1>
+      <label class="bs-q"><span class="sr">Buscar</span><input type="search" id="bs-q" placeholder="Nombre, bodega, zona, uva…" autocomplete="off" /></label>
+    </section>
+    <section class="wrap bs-layout">
+      <aside class="bs-facets" id="bs-facets" aria-label="Filtros">
+        <div class="bs-facets-head"><b>Filtros</b><button type="button" class="linkish" id="bs-clear">Quitar todos</button><button type="button" class="bs-close" id="bs-close" aria-label="Cerrar filtros">×</button></div>
+        <div id="bs-groups"></div>
+        <button type="button" class="btn solid bs-apply" id="bs-apply">Ver los vinos</button>
+      </aside>
+      <div class="bs-results">
+        <div class="bs-bar">
+          <p class="bs-count" id="bs-count" aria-live="polite"></p>
+          <button type="button" class="btn bs-open" id="bs-open">Filtros <b id="bs-nf"></b></button>
+          <label class="bs-sort">Ordenar <select id="bs-sort"><option value="bodega">Por bodega</option><option value="nombre">Por nombre</option><option value="ficha">Con ficha y vídeo primero</option></select></label>
+        </div>
+        <div class="bs-chips" id="bs-chips"></div>
+        <div class="bs-grid" id="bs-grid"></div>
+        <p class="bs-empty" id="bs-empty" hidden>Ningún vino cumple todos esos filtros. <button type="button" class="linkish" id="bs-clear2">Quitar filtros</button></p>
+        <p class="cat-source">Celobert Vins es una distribuidora ficticia: bodegas, vinos, uvas y gamas de precio son inventados para este portfolio. En una distribuidora real, todo saldría de su plataforma de pedidos.</p>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="order-fab" id="pp-fab" hidden>Propuesta <b id="pp-n">0</b></button>
+  <footer class="foot" id="contacto">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+
+  <script src="catalogo-data.js"></script>
+  <script src="carta-data.js"></script>
+  <script src="fichas.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="buscador.js"></script>
+</body>
+</html>
