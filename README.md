@@ -17,6 +17,8 @@ bodega real es casual.
 - **Propuestas visuales para clientes**: el comercial elige vinos, cantidades, precios y una nota
   por vino; sale un documento con la imagen de la marca (pedido completo en la primera página,
   una ficha por vino y cierre), que se descarga en PDF A4 o se comparte por enlace.
+- **Carta de vinos del restaurante**: con los vinos que compra el cliente, maqueta su carta (nombre,
+  logo, precios de botella y copa) en tres diseños; se reparte sola en hojas A4 y se descarga en PDF.
 - **Asistente de carta para comerciales**: según la cocina del restaurante, el tamaño de su carta,
   su gama de precio y lo que ya tiene, propone qué estilos le faltan y con qué vinos cubrirlos, y
   genera un texto para compartir con el cliente.

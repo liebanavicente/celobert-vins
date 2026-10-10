@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Carta del restaurante · Celobert Vins (portfolio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="cv-page-body">
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top" id="top"></header>
+
+  <main>
+    <section class="pp-hero wrap">
+      <p class="kicker">Para el equipo comercial · prototipo</p>
+      <h1>La carta <em>del restaurante</em></h1>
+      <p class="lead">Con los vinos que el cliente compra, maqueta su carta de vinos: su nombre, su logo y sus precios. Se ordena por estilos, se reparte en hojas A4 y se descarga lista para imprimir. Un regalo que deja los vinos de la casa en su mesa.</p>
+    </section>
+
+    <section class="pp-layout wrap">
+      <aside class="pp-editor" aria-label="Editor de la carta">
+        <fieldset class="cc-step">
+          <legend><span>1</span> El restaurante</legend>
+          <label class="cc-row">Nombre<input id="cv-rest" placeholder="Restaurante Mar Blava" /></label>
+          <label class="cc-row">Subtítulo<input id="cv-sub" placeholder="Carta de vinos" /></label>
+          <div class="cc-row">Logo (opcional)
+            <span class="cv-logo-row"><input id="cv-logo" type="file" accept="image/*" /><button type="button" class="linkish" id="cv-logo-del" hidden>Quitar logo</button></span>
+          </div>
+        </fieldset>
+        <fieldset class="cc-step">
+          <legend><span>2</span> El diseño</legend>
+          <div class="cv-estilos" id="cv-estilos" role="radiogroup" aria-label="Diseño de la carta">
+            <button type="button" role="radio" data-estilo="clasica"><i class="sw-clasica"></i>Clásica</button>
+            <button type="button" role="radio" data-estilo="bistro"><i class="sw-bistro"></i>Bistró</button>
+            <button type="button" role="radio" data-estilo="moderna"><i class="sw-moderna"></i>Moderna</button>
+          </div>
+          <div class="cc-row">Color<div class="cv-colors" id="cv-colors" role="radiogroup" aria-label="Color de acento"></div></div>
+          <label class="cv-check"><input type="checkbox" id="cv-firma" /> Firmar «Selección de vinos · Celobert Vins»</label>
+        </fieldset>
+        <fieldset class="cc-step">
+          <legend><span>3</span> Los vinos y sus precios</legend>
+          <label class="pp-find"><span class="sr">Añadir un vino</span><input id="cv-find" placeholder="Añadir un vino: nombre o bodega…" autocomplete="off" /></label>
+          <div class="pp-sugg" id="cv-sugg"></div>
+          <ol class="pp-list" id="cv-list"></ol>
+          <p class="cc-hint" id="cv-empty-hint">Aún no hay vinos. Añádelos aquí, desde el <a href="buscador.html">buscador</a> o desde una <a href="propuesta.html">propuesta</a>.</p>
+        </fieldset>
+        <div class="pp-actions">
+          <button type="button" class="btn solid" id="cv-pdf">Descargar la carta (PDF)</button>
+          <a class="btn" href="propuesta.html">Ir a la propuesta</a>
+        </div>
+      </aside>
+      <div class="cv-preview" id="cv-preview"><div class="cv-pages" id="cv-pages"></div></div>
+    </section>
+  </main>
+  <footer class="foot" id="contacto">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+
+  <script src="catalogo-data.js"></script>
+  <script src="carta-data.js"></script>
+  <script src="fichas.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="assets/vendor/html2canvas.min.js"></script>
+  <script src="assets/vendor/jspdf.umd.min.js"></script>
+  <script src="carta-restaurante.js"></script>
+</body>
+</html>
