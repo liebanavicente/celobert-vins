@@ -19,7 +19,6 @@
   $("zone-name").textContent = zone;
   $("zone-tabs").innerHTML = ZONES.map((z) => `<a href="?zona=${norm(z)}" class="${z === zone ? "on" : ""}">${z}</a>`).join("");
   // cada zona tiene su catálogo (los cuatro PDF de 2022): se ven solo sus vinos
-  $("o-zone").value = zone;
   $("cat-count").textContent = WINES.filter((x) => (x.zones || x.winery.zones || []).includes(zone)).length;
   $("cat-wineries").textContent = C.filter((w) => (w.zones || []).includes(zone)).length;
 
@@ -317,10 +316,6 @@
   $("order-close").addEventListener("click", closeOrder);
   $("scrim").addEventListener("click", () => (!$("reel").hidden ? closeReel() : !$("order").hidden ? closeOrder() : closeModal()));
   addEventListener("keydown", (e) => e.key === "Escape" && (!$("reel").hidden ? closeReel() : !$("modal").hidden ? closeModal() : !$("order").hidden && closeOrder()));
-  $("o-send").addEventListener("click", () => {
-    $("o-ok").hidden = false;
-    $("o-ok").textContent = "Prototipo: tu selección llegaría al comercial de tu zona, con copia a tu correo.";
-  });
 
   // ---------- PDF (imprimir): el catálogo filtrado o solo el pedido ----------
   $("print-cat").addEventListener("click", () => {

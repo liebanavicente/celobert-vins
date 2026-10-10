@@ -30,6 +30,17 @@
     }
   };
 
+  // ---------- «Añadir a mi selección» desde la ficha de un vino (la selección sirve para propuestas y cartas) ----------
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-add-sel]");
+    if (!b) return;
+    const KEY = "celobert-seleccion";
+    let sel = [];
+    try { sel = JSON.parse(localStorage.getItem(KEY) || "[]"); } catch {}
+    if (!sel.some((o) => o.id === b.dataset.addSel)) sel.push({ id: b.dataset.addSel, n: 1 });
+    try { localStorage.setItem(KEY, JSON.stringify(sel)); } catch {}
+    b.outerHTML = `<a class="btn solid" href="propuesta.html">✓ En tu selección · crear propuesta →</a>`;
+  });
   // ---------- la plataforma de pedidos de la distribuidora (window.PLATFORM, en data.js) ----------
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-platform]");
@@ -188,7 +199,7 @@
           ${b.summary ? `<p class="lead">${esc(b.summary)}</p>` : ""}
           <div class="chips">${[...(x.tech && x.tech.vintage ? [/^\d/.test(x.tech.vintage) ? `Añada ${x.tech.vintage}` : x.tech.vintage.replace(/^./, (c) => c.toUpperCase())] : []), b.country, fmt, ...zones].map((c) => `<span class="chip">${esc(c)}</span>`).join("")}</div>
           <div class="btns">
-            <a class="btn solid" href="#" data-platform>Pedir en la plataforma</a>
+            <button type="button" class="btn solid" data-add-sel="${x.id}">Añadir a mi selección</button>
             <a class="btn" href="bodega.html?id=${encodeURIComponent(b.id)}">La bodega</a>
             ${x.video ? `<a class="btn" href="#material">▶ Ver su vídeo</a>` : ""}
             ${b.reel ? `<a class="btn" href="catalogo.html?reel=${encodeURIComponent(b.id)}">▶ Reel de la bodega</a>` : ""}
@@ -216,7 +227,7 @@
           ${x.tech ? techBox(x.tech) : `<div class="pending">
             <b>Datos técnicos y nota de cata</b>
             <p>Variedades, crianza y nota de cata vienen en la ficha técnica de la bodega: te la facilita tu comercial. Cada vino tiene aquí su ficha completa.</p>
-            <a class="btn" href="#" data-platform>Pedir la ficha técnica</a>
+            <a class="btn" href="#contacto">Pedir la ficha técnica</a>
           </div>`}
         </div>
       </section>

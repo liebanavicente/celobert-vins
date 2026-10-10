@@ -35,7 +35,7 @@
       <div class="wrap">
         <p class="kicker">Catálogo vivo · siempre al día</p>
         <h1>Catálogo <em id="zone-name">Barcelona</em></h1>
-        <p class="lead"><b id="cat-count">0</b> vinos de <b id="cat-wineries">0</b> bodegas. Busca, filtra, guarda tu selección y pídela en la plataforma de clientes. ¿Eres del equipo comercial? <a href="comerciales.html">Área comercial →</a></p>
+        <p class="lead"><b id="cat-count">0</b> vinos de <b id="cat-wineries">0</b> bodegas. Busca, filtra y guarda tu selección para preparar propuestas y cartas. ¿Eres del equipo comercial? <a href="comerciales.html">Área comercial →</a></p>
         <p class="print-only" id="print-date"></p>
         <div class="zone-tabs" id="zone-tabs"></div>
         <p class="zone-note" id="zone-note" hidden></p>
@@ -68,11 +68,9 @@
     <div class="drawer-head"><h2>Mi selección</h2><button type="button" class="x" id="order-close" aria-label="Cerrar">×</button></div>
     <div id="order-list"></div>
     <div class="drawer-foot" id="order-foot">
-      <label>Local<input id="o-local" placeholder="Nombre del restaurante o tienda" /></label>
-      <label>Zona<select id="o-zone"><option>Barcelona</option><option>Girona</option><option>Tarragona</option><option>Madrid</option></select></label>
-      <label>Notas<textarea id="o-notes" rows="2" placeholder="Fechas, formatos, dudas…"></textarea></label>
-      <div class="btns"><button type="button" class="btn solid" id="o-platform" data-platform>Hacer el pedido en la plataforma</button><button type="button" class="btn" id="o-send">Enviar al comercial</button><button type="button" class="btn" id="o-print">Descargar (PDF)</button><a class="btn" href="propuesta.html">Crear propuesta visual</a></div>
-      <p class="ok" id="o-ok" hidden></p>
+      <p class="cc-hint">Con estos vinos puedes preparar una propuesta o la carta de un restaurante.</p>
+      <div class="btns"><a class="btn solid" href="propuesta.html">Crear una propuesta</a><a class="btn" href="carta-restaurante.html">Hacer una carta de vinos</a><button type="button" class="btn" id="o-print">Descargar la lista (PDF)</button></div>
+      <p class="cc-hint">Celobert Vins es ficticia: aquí no se compra, solo se preparan propuestas y cartas.</p>
     </div>
   </aside>
   <div class="scrim" id="scrim" hidden></div>
@@ -101,7 +99,7 @@
         <p class="winery" id="m-winery"></p>
         <div class="chips" id="m-chips"></div>
         <div class="qty"><button type="button" id="m-minus" aria-label="Menos">−</button><span id="m-qty">6</span><button type="button" id="m-plus" aria-label="Más">+</button><small>botellas</small></div>
-        <div class="btns"><button type="button" class="btn solid" id="m-add">Añadir a mi selección</button><button type="button" class="btn" data-platform>Pedir en la plataforma</button><a class="btn" id="m-ficha" hidden>Ver ficha completa</a><button type="button" class="btn" id="m-sheet">Pedir ficha técnica</button></div>
+        <div class="btns"><button type="button" class="btn solid" id="m-add">Añadir a mi selección</button><a class="btn" id="m-ficha" hidden>Ver ficha completa</a><button type="button" class="btn" id="m-sheet">Pedir ficha técnica</button></div>
         <p class="ok" id="m-ok" hidden></p>
       </div>
     </div>
