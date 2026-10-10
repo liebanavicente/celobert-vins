@@ -76,6 +76,14 @@ window.CATALOG = [
     ],
     "tipo": "tinto",
     "gama": "alta",
+    "video": {
+     "src": "assets/videos/celler-pedra-blava-terrassa-vella.mp4",
+     "poster": "assets/videos/celler-pedra-blava-terrassa-vella-poster.jpg",
+     "downloads": {
+      "9x16": "assets/descargas/celler-pedra-blava-terrassa-vella-9x16.mp4",
+      "4x5": "assets/descargas/celler-pedra-blava-terrassa-vella-4x5.mp4"
+     }
+    },
     "tech": {
      "vintage": "",
      "source": {

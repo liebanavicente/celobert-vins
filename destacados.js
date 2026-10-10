@@ -18,7 +18,7 @@
         if (x.tech?.vintage && !facts.some(([k]) => k === "Edición" || k === "Añada")) facts.unshift([/^\d/.test(x.tech.vintage) ? "Añada" : "Edición", x.tech.vintage.replace(/^edición\s*/i, "")]);
         out.push({
           id: x.id, name: x.name, winery: b.name, region: b.do,
-          hook: x.tech?.vintageNote && x.id === TOP[0] ? x.tech.vintageNote : firstSentence(x.tech?.intro),
+          hook: x.tech?.vintageNote && x.id === TOP[0] ? x.tech.vintageNote : firstSentence(x.tech?.intro) || x.tech?.tasting,
           facts: facts.slice(0, 3),
           video: x.video.src, poster: x.video.poster, download: x.video.downloads?.["9x16"],
           href: `vino.html?id=${encodeURIComponent(x.id)}`, thumb: x.img_hd || x.img,

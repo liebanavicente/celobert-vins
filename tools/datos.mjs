@@ -129,6 +129,8 @@ const BODEGAS = [
   },
 ];
 
+// vinos con vídeo (destacados): hechos con la plantilla de Remotion del toolkit, en modo «gratis» (botella SVG + grafismo)
+const VIDEOS = { "celler-pedra-blava-terrassa-vella": true };
 const CATALOG = [], CARTA = [], BOTELLAS = [];
 for (const b of BODEGAS) {
   const id = slug(`${b.name} ${b.do}`);
@@ -138,6 +140,7 @@ for (const b of BODEGAS) {
     BOTELLAS.push({ id: wid, bodega: b.name, vino: name, do: b.do, tipo, forma, label: b.label });
     return {
       id: wid, name, img: `assets/botellas/${wid}.svg`, zones: b.zones, tipo, gama,
+      ...(VIDEOS[wid] ? { video: { src: `assets/videos/${wid}.mp4`, poster: `assets/videos/${wid}-poster.jpg`, downloads: { "9x16": `assets/descargas/${wid}-9x16.mp4`, "4x5": `assets/descargas/${wid}-4x5.mp4` } } } : {}),
       tech: { vintage: "", source: { label: "Ficha ficticia · proyecto de portfolio", url: "" }, intro: "",
         rows: [["Tipo", tipo[0].toUpperCase() + tipo.slice(1)], ["Variedades", uvas], ["Crianza", crianza], ["Gama", gama[0].toUpperCase() + gama.slice(1)], ["Zona", b.do]],
         vintageNote: "", tasting: nota, pairing: null },

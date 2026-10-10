@@ -859,3 +859,7 @@ body.nav-hidden .cat-bar { top: 0; } /* la cabecera se esconde al bajar: la barr
 /* Celobert: la palabra de la marca, con «vins» en pequeño */
 .brand-word small, .intro-word small { font-size: 0.5em; letter-spacing: 0.18em; text-transform: uppercase; margin-left: 0.35em; color: var(--purple); font-weight: 600; }
 .brand-word { color: var(--olive); }
+/* asistente: lo añadido a la propuesta en la barra; y el formulario fijo, pero con su propio scroll si no cabe */
+.cc-bar-add { background: repeating-linear-gradient(135deg, rgba(217, 164, 65, 0.9) 0 4px, rgba(217, 164, 65, 0.45) 4px 8px); top: 3px !important; bottom: 3px !important; }
+.lg-add { background: repeating-linear-gradient(135deg, rgba(217, 164, 65, 0.9) 0 3px, rgba(217, 164, 65, 0.45) 3px 6px); }
+@media (min-width: 901px) { .cc-form { max-height: calc(100vh - 120px); overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; } }

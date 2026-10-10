@@ -86,10 +86,10 @@
   $("cc-fab").addEventListener("click", () => (location.href = "catalogo.html?seleccion=1"));
 
   // ---------- propuesta ----------
-  function suggest(tipo, n, pref) {
+  function suggest(tipo, n, pref, excl = new Set()) {
     // orden: el origen que pide el restaurante manda (+10); dentro, los que tienen ficha oficial o vídeo; dentro, los que tienen ficha oficial o vídeo; y una bodega distinta cada vez
     const gamas = $("cc-gama").value;
-    const pool = WINES.filter((x) => x.t.tipo === tipo && (gamas === "todas" || gamas.split(",").includes(x.t.gama)))
+    const pool = WINES.filter((x) => x.t.tipo === tipo && !excl.has(x.id) && (gamas === "todas" || gamas.split(",").includes(x.t.gama)))
       .map((x) => ({ x, s: (pref === "todo" || origin(x) === pref ? 10 : 0) + (x.tech ? 1 : 0) + (x.video ? 1 : 0) }))
       .sort((a, b) => b.s - a.s || a.x.winery.name.localeCompare(b.x.winery.name) || a.x.name.localeCompare(b.x.name));
     const out = [], used = new Set();
@@ -104,31 +104,39 @@
     return out;
   }
 
-  function render() {
-    const size = Number($("cc-size").value);
-    const pref = $("cc-origen").value;
-    const mix = COCINAS[cocina][1];
+  // el plan: lo que tiene el cliente + lo que ya va en la propuesta (la selección) frente al reparto orientativo
+  function plan() {
+    const size = Number($("cc-size").value), pref = $("cc-origen").value, mix = COCINAS[cocina][1];
     const target = Object.fromEntries(STYLES.map(([k]) => [k, Math.max(k === "dulce" || k === "generoso" ? 1 : 0, Math.round((size * mix[k]) / 100))]));
-    const totalHave = Object.values(have).reduce((a, b) => a + b, 0);
-    const gaps = STYLES.map(([k, label]) => ({ k, label, gap: Math.max(0, target[k] - have[k]) })).filter((g) => g.gap > 0);
-    const max = Math.max(...STYLES.map(([k]) => Math.max(target[k], have[k])), 1);
+    const sel = new Set(load().map((o) => o.id));
+    const inProp = WINES.filter((x) => sel.has(x.id));
+    const added = Object.fromEntries(STYLES.map(([k]) => [k, inProp.filter((x) => x.t.tipo === k).length]));
+    const rows = STYLES.map(([k, label]) => {
+      const gap = Math.max(0, target[k] - have[k] - added[k]);
+      return { k, label, gap, list: gap ? suggest(k, gap, pref, sel) : [] };
+    });
+    return { size, pref, target, added, inProp, rows, gaps: rows.filter((r) => r.gap > 0) };
+  }
 
+  function render() {
+    const { size, pref, target, added, inProp, gaps } = plan();
+    const totalHave = Object.values(have).reduce((a, b) => a + b, 0);
+    const max = Math.max(...STYLES.map(([k]) => Math.max(target[k], have[k] + added[k])), 1);
     const bars = STYLES.map(([k, label]) => `
       <div class="cc-bar">
         <span class="cc-bar-label">${label}</span>
         <span class="cc-bar-track">
           <i class="cc-bar-target" style="width:${(target[k] / max) * 100}%"></i>
           <i class="cc-bar-have" style="width:${(have[k] / max) * 100}%"></i>
+          <i class="cc-bar-add" style="left:${(have[k] / max) * 100}%;width:${(added[k] / max) * 100}%"></i>
         </span>
-        <span class="cc-bar-n"><b>${have[k]}</b> / ${target[k]}</span>
+        <span class="cc-bar-n"><b>${have[k] + added[k]}</b> / ${target[k]}</span>
       </div>`).join("");
-
-    const blocks = gaps.map((g) => {
-      const list = suggest(g.k, g.gap, pref);
-      return `
+    const missing = gaps.reduce((a, g) => a + g.gap, 0);
+    const blocks = gaps.map((g) => `
         <div class="cc-gap">
           <h3>${g.label} <small>le ${g.gap === 1 ? "falta 1" : `faltan ${g.gap}`}</small></h3>
-          ${list.length ? `<div class="cc-cards">${list.map((x) => `
+          ${g.list.length ? `<div class="cc-cards">${g.list.map((x) => `
             <article class="cc-card">
               <img src="${x.img_hd || x.img}" alt="" loading="lazy" />
               <div>
@@ -138,31 +146,30 @@
                 <span class="cc-tags">${pref !== "todo" && origin(x) !== pref ? `<em class="cc-other">Otro origen: no hay más en esa gama</em>` : ""}${x.video ? `<a href="vino.html?id=${encodeURIComponent(x.id)}">Ficha y vídeo →</a>` : ""}<em class="cc-slot">Gama ${esc(x.t.gama)}</em></span>
               </div>
               <button type="button" class="cc-add" data-id="${x.id}" ${inSel(x.id) ? "disabled" : ""}>${inSel(x.id) ? "En tu selección" : "Añadir"}</button>
-            </article>`).join("")}</div>` : `<p class="cc-empty">Aún no hay vinos de este estilo con ficha en el prototipo.</p>`}
-        </div>`;
-    }).join("");
-
-    const allIds = gaps.flatMap((g) => suggest(g.k, g.gap, pref).map((x) => x.id)).filter((id) => !inSel(id));
+            </article>`).join("")}</div>` : `<p class="cc-empty">No quedan más vinos de este estilo con esos filtros.</p>`}
+        </div>`).join("");
+    const allIds = gaps.flatMap((g) => g.list.map((x) => x.id));
     $("cc-result").innerHTML = `
       <div class="cc-panel">
         <p class="kicker">${esc($("cc-cliente").value.trim() || "La carta del cliente")} · ${esc(COCINAS[cocina][0])} · ${size} referencias</p>
-        <h2>${gaps.length ? `Le faltan <em>${gaps.reduce((a, g) => a + g.gap, 0)}</em> referencias` : "Su carta está <em>equilibrada</em>"}</h2>
-        <p class="cc-legend"><i class="lg-have"></i> lo que tienes (${totalHave}) <i class="lg-target"></i> reparto orientativo</p>
+        <h2>${missing ? `Le faltan <em>${missing}</em> referencias` : "Su carta está <em>equilibrada</em>"}</h2>
+        <p class="cc-legend"><i class="lg-have"></i> lo que tiene (${totalHave}) <i class="lg-add"></i> en la propuesta (${inProp.length}) <i class="lg-target"></i> reparto orientativo</p>
         ${bars}
       </div>
       ${blocks}
-      ${allIds.length ? `<div class="cc-all"><button type="button" class="btn solid" id="cc-add-all">Añadir las ${allIds.length} a la propuesta</button><button type="button" class="btn" id="cc-share">Compartir la propuesta</button><a class="btn" href="catalogo.html?seleccion=1">Ver la selección</a></div>` : ""}`;
+      <div class="cc-all">${allIds.length ? `<button type="button" class="btn solid" id="cc-add-all">Añadir las ${allIds.length} a la propuesta</button>` : ""}${inProp.length || allIds.length ? `<button type="button" class="btn" id="cc-share">Compartir la propuesta</button>` : ""}${inProp.length ? `<a class="btn" href="catalogo.html?seleccion=1">Ver la propuesta (${inProp.length})</a>` : ""}</div>`;
   }
 
   $("cc-result").addEventListener("click", (e) => {
     const b = e.target.closest(".cc-add");
     if (b) return add([b.dataset.id]);
     if (e.target.id === "cc-share") {
-      const pref = $("cc-origen").value, size = Number($("cc-size").value), mix = COCINAS[cocina][1];
+      const { size, inProp, gaps } = plan();
       const cli = $("cc-cliente").value.trim();
+      // lo que ya va en la propuesta; si aún no hay nada, las sugerencias
+      const wines = inProp.length ? inProp : gaps.flatMap((g) => g.list);
       const lines = STYLES.map(([k, label]) => {
-        const target = Math.max(k === "dulce" || k === "generoso" ? 1 : 0, Math.round((size * mix[k]) / 100));
-        const list = suggest(k, Math.max(0, target - have[k]), pref);
+        const list = wines.filter((x) => x.t.tipo === k);
         return list.length ? `${label}:\n${list.map((x) => `· ${x.name} (${x.winery.name}, ${x.winery.do})`).join("\n")}` : "";
       }).filter(Boolean);
       const text = `Propuesta de vinos${cli ? ` para ${cli}` : ""} · Celobert Vins\nCocina: ${COCINAS[cocina][0]} · carta de ${size} referencias\n\n${lines.join("\n\n")}\n\nDisfruta de un consumo responsable.`;
@@ -170,14 +177,7 @@
       else navigator.clipboard?.writeText(text).then(() => { e.target.textContent = "Copiada ✓"; setTimeout(() => (e.target.textContent = "Compartir la propuesta"), 2000); });
       return;
     }
-    if (e.target.id === "cc-add-all") {
-      const pref = $("cc-origen").value, size = Number($("cc-size").value), mix = COCINAS[cocina][1];
-      const ids = STYLES.flatMap(([k]) => {
-        const target = Math.max(k === "dulce" || k === "generoso" ? 1 : 0, Math.round((size * mix[k]) / 100));
-        return suggest(k, Math.max(0, target - have[k]), pref).map((x) => x.id);
-      });
-      add(ids);
-    }
+    if (e.target.id === "cc-add-all") add(plan().gaps.flatMap((g) => g.list.map((x) => x.id)));
   });
 
   paintFab();
