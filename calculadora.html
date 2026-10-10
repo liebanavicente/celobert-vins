@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Vino por copas · Celobert Vins (portfolio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Hanken+Grotesk:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="cp-page" data-brand="celobert" data-brand-name="Celobert Vins" data-brand-word="celobert<small>vins</small>">
+  <div class="proposal"><b>PORTFOLIO</b> · Celobert Vins es una distribuidora ficticia: bodegas, vinos y datos inventados · Miguel Liébana, 2026</div>
+  <header class="top" id="top"></header>
+
+  <main>
+    <nav class="team-crumb wrap" aria-label="Área comercial"><a href="comerciales.html">← Área comercial</a><span>Solo para el equipo comercial</span></nav>
+    <section class="pp-hero wrap">
+      <p class="kicker">Para el equipo comercial · prototipo</p>
+      <h1>Vino <em>por copas</em></h1>
+      <p class="lead">Con los números del propio restaurante: cuánto deja cada copa y cada botella, en qué copa queda pagada y cuánto suma al mes. Compara su vino de la casa con otro y descarga el resumen para dejárselo.</p>
+    </section>
+    <section class="pp-layout wrap">
+      <aside class="pp-editor" aria-label="Datos del cálculo">
+        <fieldset class="cc-step">
+          <legend><span>1</span> El restaurante</legend>
+          <label class="cc-row">Nombre (opcional)<input id="cp-cliente" placeholder="Restaurante Mar Blava" /></label>
+          <label class="cv-check"><input type="checkbox" id="cp-iva" /> Sus precios de carta incluyen IVA (10 %)</label>
+          <label class="cc-row">Su margen objetivo por copa (%)<input id="cp-objetivo" inputmode="numeric" placeholder="70" /></label>
+        </fieldset>
+        <div id="cp-vinos" class="cp-vinos"></div>
+        <div class="pp-actions">
+          <button type="button" class="btn solid" id="cp-pdf">Descargar el resumen (PDF)</button>
+          <button type="button" class="btn ghost" id="cp-reset">Empezar de nuevo</button>
+        </div>
+        <p class="cc-hint">Todos los datos los pone el restaurante: aquí no hay precios de tarifa ni cifras nuestras.</p>
+      </aside>
+      <div class="cp-wrap"><article class="cp-sheet" id="cp-sheet" aria-live="polite"></article></div>
+    </section>
+  </main>
+  <footer class="foot" id="contacto">
+    <div class="wrap">
+      <div class="cols">
+        <div><h4>Celobert Vins</h4><p>Distribución de vinos en Barcelona, Girona, Tarragona y Madrid.</p></div>
+        <div><h4>Proyecto de portfolio</h4><p>Distribuidora ficticia<br />Bodegas y vinos inventados</p></div>
+        <div><h4>Diseño y dirección</h4><p>Miguel Liébana · 2026<br />Código con Claude Code</p></div>
+      </div>
+      <div class="legal"><span>Disfruta de un consumo responsable.</span><span>Proyecto de portfolio · marca y datos ficticios</span></div>
+    </div>
+  </footer>
+
+  <script src="catalogo-data.js"></script>
+  <script src="carta-data.js"></script>
+  <script src="fichas.js"></script>
+  <script src="nav.js"></script>
+  <script src="marca.js"></script>
+  <script src="assets/vendor/html2canvas.min.js"></script>
+  <script src="assets/vendor/jspdf.umd.min.js"></script>
+  <script src="calculadora.js"></script>
+</body>
+</html>

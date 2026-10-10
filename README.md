@@ -19,6 +19,9 @@ bodega real es casual.
   una ficha por vino y cierre), que se descarga en PDF A4 o se comparte por enlace.
 - **Carta de vinos del restaurante**: con los vinos que compra el cliente, maqueta su carta (nombre,
   logo, precios de botella y copa) en tres diseños; se reparte sola en hojas A4 y se descarga en PDF.
+- **Área comercial**: una entrada con todas las herramientas del equipo de ventas.
+- **Vino por copas**: con los números del restaurante (coste, precio de copa, copas por botella), beneficio
+  por copa y botella, margen, botella pagada en la copa N y comparativa entre vinos; resumen en PDF.
 - **Guía de carta orientativa**: según la cocina del restaurante, el tamaño de su carta y su gama de
   precio, un reparto equilibrado por estilos e ideas del catálogo para cada uno; se puede reiniciar
   y genera un texto para compartir con el cliente.

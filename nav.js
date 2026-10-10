@@ -45,7 +45,7 @@
           </div>`).join("")}
       </nav>
       <div class="nav-end">
-        <a class="pro-btn" href="#" data-platform>Acceso clientes</a>
+        <a class="team-btn" href="comerciales.html">Área comercial</a><a class="pro-btn" href="#" data-platform>Acceso clientes</a>
         <button class="burger" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
       </div>
     </div>`;
@@ -62,7 +62,7 @@
     </nav>
     <form class="menu-search" action="buscador.html"><label><span class="sr">Buscar</span><input name="q" placeholder="Buscar un vino o una bodega" /></label></form>
     <div class="menu-zones">${ZONES.map((z) => `<a href="catalogo.html?zona=${z.toLowerCase()}">${z}<em>${count(z) || ""}</em></a>`).join("")}</div>
-    <div class="menu-end"><a class="btn solid light" href="#" data-platform>Acceso clientes</a><a class="menu-mail" href="#contacto">Contacto</a></div>`;
+    <div class="menu-end"><a class="btn solid light" href="#" data-platform>Acceso clientes</a><a class="menu-mail" href="comerciales.html">Área comercial</a></div>`;
   document.body.append(menu);
 
   const burger = header.querySelector(".burger");
