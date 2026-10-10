@@ -83,6 +83,7 @@
         return;
       }
       doc.notas[li.dataset.id] = { ...(doc.notas[li.dataset.id] || {}), [e.target.dataset.f]: e.target.value };
+      if (e.target.dataset.f === "precio") delete doc.notas[li.dataset.id].prueba; // escrito a mano: ya no es de prueba
       saveAll(); paintDoc();
     });
     // al tocar la cantidad se selecciona entera: lo que se escribe la sustituye
@@ -101,6 +102,13 @@
       if (!k) return;
       doc.oferta[k] = e.target.value;
       saveAll(); paintDoc();
+    });
+    $("pp-test").addEventListener("click", () => {
+      ids.forEach((id) => {
+        const n = doc.notas[id] || {};
+        if (!n.precio) doc.notas[id] = { ...n, precio: window.precioPrueba(byId[id]).toLocaleString("es-ES", { minimumFractionDigits: 2 }) + " €", prueba: true };
+      });
+      saveAll(); paint();
     });
     $("pp-print").addEventListener("click", (e) => exportPDF(e.currentTarget));
     $("pp-link").addEventListener("click", (e) => {
@@ -173,7 +181,7 @@
           <div class="pp-li-main">
             <b>${esc(w.name)}</b><small>${esc(w.winery)}</small>
             <span class="pp-li-row"><span class="pp-qty-label">Cantidad</span><span class="pp-qty"><button type="button" data-a="minus" aria-label="Una menos">−</button><input data-f="qty" type="text" inputmode="numeric" pattern="[0-9]*" aria-label="Cantidad" value="${q(id)}" /><button type="button" data-a="plus" aria-label="Una más">+</button></span></span>
-            <input data-f="precio" inputmode="decimal" placeholder="Precio por botella para el cliente" value="${esc(n.precio || "")}" />
+            <input data-f="precio" inputmode="decimal" placeholder="Precio por botella para el cliente" value="${esc(n.precio || "")}" />${n.prueba ? `<small class="pp-test-tag">precio de prueba</small>` : ""}
             <span class="pp-offer-row">
               <select data-f="ot" aria-label="Oferta de este vino">
                 <option value="" ${!n.ot ? "selected" : ""}>Sin oferta</option>
@@ -276,7 +284,7 @@
           <thead><tr><th>Vino</th><th class="r">Cant.</th><th class="r">Precio</th><th>Oferta</th><th class="r">Importe</th></tr></thead>
           <tbody>${wines.map((w, i) => {
             const n = doc.notas[w.id] || {}, l = T.L[i];
-            return `<tr><td><b>${String(i + 1).padStart(2, "0")} · ${esc(w.name)}</b><small>${esc(w.winery)} · ${esc(w.formato)}</small></td><td class="r">${l.u}${l.gratis ? `<small class="pp-free">+${l.gratis} gratis</small>` : ""}</td><td class="r">${n.precio ? esc(n.precio) : "—"}</td><td>${l.label ? `<span class="pp-offer">${esc(l.label)}</span>` : ""}${l.hint ? `<small class="pp-nudge">${esc(l.hint)}</small>` : ""}</td><td class="r">${l.pagado != null ? eur(l.pagado) : "—"}${l.ahorro ? `<small class="pp-save">ahorras ${eur(l.ahorro)}</small>` : ""}</td></tr>`;
+            return `<tr><td><b>${String(i + 1).padStart(2, "0")} · ${esc(w.name)}</b><small>${esc(w.winery)} · ${esc(w.formato)}</small></td><td class="r">${l.u}${l.gratis ? `<small class="pp-free">+${l.gratis} gratis</small>` : ""}</td><td class="r">${n.precio ? esc(n.precio) : "—"}${n.prueba ? `<small class="pp-test-tag">prueba</small>` : ""}</td><td>${l.label ? `<span class="pp-offer">${esc(l.label)}</span>` : ""}${l.hint ? `<small class="pp-nudge">${esc(l.hint)}</small>` : ""}</td><td class="r">${l.pagado != null ? eur(l.pagado) : "—"}${l.ahorro ? `<small class="pp-save">ahorras ${eur(l.ahorro)}</small>` : ""}</td></tr>`;
           }).join("")}</tbody>
           <tfoot>
             ${T.vol ? `<tr class="sub"><td colspan="4">Descuento por volumen (−${pctTxt(T.vPct)})</td><td class="r">−${eur(T.vol)}</td></tr>` : ""}
@@ -294,6 +302,7 @@
             ${T.regalo ? `<li><span>Además</span><b>${esc(T.regalo)}</b></li>` : ""}
           </ul>
         </div>` : ""}` : `<p class="pp-intro">Añade vinos para ver aquí el pedido.</p>`}
+        ${wines.some((w) => (doc.notas[w.id] || {}).prueba) ? `<p class="pp-test-note">Precios de prueba para probar la herramienta: no son precios reales.</p>` : ""}
         <p class="pp-brand"><span class="brand-word">celobert<small>vins</small></span></p>
       </section>
       ${wines.length ? wines.map((w, i) => {
@@ -308,7 +317,7 @@
             ${n.nota ? `<blockquote class="pp-note">${esc(n.nota)}${doc.comercial ? `<cite>${esc(doc.comercial)}</cite>` : ""}</blockquote>` : ""}
             ${w.summary ? `<p class="pp-winery"><b>La bodega.</b> ${esc(corto(w.summary))}</p>` : ""}
             ${(() => { const l = line(w); return l.label ? `<p class="pp-wine-offer"><span class="pp-offer">${esc(l.label)}</span>${l.gratis ? ` ${l.u} botellas + <b>${l.gratis} gratis</b>: te sale a <b>${eur(l.pagado / (l.u + l.gratis))}</b> la botella.` : l.ahorro ? ` Te ahorras <b>${eur(l.ahorro)}</b> en este vino.` : l.hint ? ` ${esc(l.hint)}.` : ""}</p>` : ""; })()}
-            <p class="pp-price">${n.precio ? `<span>Precio para ti</span><b>${esc(n.precio)}</b>` : `<span>Precio</span><b class="soft">según tarifa</b>`}</p>
+            <p class="pp-price">${n.precio ? `<span>${n.prueba ? "Precio de prueba" : "Precio para ti"}</span><b>${esc(n.precio)}</b>` : `<span>Precio</span><b class="soft">según tarifa</b>`}</p>
           </div>
         </section>`;
       }).join("") : `<section class="pp-page pp-empty"><p>Añade vinos para ver aquí sus páginas.</p></section>`}
@@ -317,6 +326,7 @@
         <h3>¿Te los llevamos <em>para probar</em>?</h3>
         <p>Pide en la plataforma de clientes o responde a ${doc.comercial ? esc(doc.comercial) : "tu comercial"}: ajustamos cantidades, formatos y fechas de entrega.</p>
         <p class="pp-fine">Precios y ofertas indicados por tu comercial para esta propuesta${doc.oferta.caja ? `; cajas de ${esc(doc.oferta.caja)} botellas` : ""}. Celobert Vins es una distribuidora ficticia: vinos y datos inventados. Disfruta de un consumo responsable.</p>
+        ${wines.some((w) => (doc.notas[w.id] || {}).prueba) ? `<p class="pp-test-note">Precios de prueba para probar la herramienta: no son precios reales.</p>` : ""}
         <p class="pp-brand"><span class="brand-word">celobert<small>vins</small></span></p>
       </section>`;
   }

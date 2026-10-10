@@ -1459,3 +1459,10 @@ body.pp-view .pp-view-only { display: flex; justify-content: space-between; alig
 .pp-export .pp-offer { line-height: 12px !important; padding: 3px 8px 9px !important; }
 .pp-export .pp-save-big small { margin-top: 10px; line-height: 1.5 !important; }
 .pp-export .pp-free, .pp-export .pp-save, .pp-export .pp-nudge { line-height: 1.5 !important; margin-top: 2px; }
+
+/* precios de prueba: siempre visibles como tales */
+.pp-test-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #8a5a00; background: #fbf1dc; padding: 1px 6px; margin-left: 6px; }
+.pp-li-main .pp-test-tag { margin: -2px 0 0; justify-self: start; }
+.pp-test-note { margin: 10px 8% 0; font-size: 12px; font-weight: 600; color: #8a5a00; }
+.pp-export .pp-test-note { margin: 10px 64px 0 !important; }
+.pp-export .pp-test-tag { line-height: 10px !important; padding: 1px 6px 6px !important; }

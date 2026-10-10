@@ -43,3 +43,17 @@
   }));
   window.FICHAS = { ALL, byId: Object.fromEntries(ALL.map((w) => [w.id, w])), TIPOS, norm };
 })();
+
+// Precios de PRUEBA para probar la herramienta sin tarifa: verosímiles según el tipo y la categoría del vino, redondeados.
+// No son precios reales y siempre se marcan como «precio de prueba».
+window.precioPrueba = (w) => {
+  if (w.gama) return { entrada: 9.5, media: 16.5, alta: 34 }[w.gama] || 14; // Celobert: su gama ficticia
+  const base = { espumoso: 15, blanco: 11, rosado: 9, tinto: 13, generoso: 12, dulce: 18, otros: 16 }[w.tipo] || 12;
+  const n = String(w.name).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  let k = 1;
+  if (/grand cru|gran cru|montrachet|chambertin|musigny|reserva especial|unico|eszencia|vors|millesime|vintage|grande annee|vieilles vignes/.test(n)) k = 6;
+  else if (/1er cru|premier cru|gran reserva|aszu|clos |reserva/.test(n)) k = 2.5;
+  else if (/crianza|seleccion|selection/.test(n)) k = 1.5;
+  if (/magnum/.test(n)) k *= 2.2;
+  return Math.round(base * k * 2) / 2;
+};

@@ -99,6 +99,7 @@
       box.querySelector("[data-sugg]").innerHTML = q.length < 2 ? "" : ALL.filter((w) => q.split(/\s+/).every((t) => w.search.includes(t))).slice(0, 5)
         .map((w) => `<button type="button" data-id="${w.id}"><img src="${w.img}" alt="" /><span><b>${esc(w.name)}</b><small>${esc(w.winery)}</small></span></button>`).join("");
     }
+    st.prueba = false;
     save(); paintResult();
   });
   $("cp-vinos").addEventListener("change", (e) => {
@@ -120,7 +121,19 @@
     else return;
     save(); paintForm(); paintResult();
   });
-  $("cp-reset").addEventListener("click", () => { st = BLANK(); save(); paintForm(); paintResult(); });
+  $("cp-reset").addEventListener("click", () => { st = BLANK(); st.prueba = false; save(); paintForm(); paintResult(); });
+  // datos de prueba: coste de botella de prueba y una copa a ~3 veces el coste por copa (redondeada); marcado como prueba
+  $("cp-test").addEventListener("click", () => {
+    st.vinos.forEach((v, i) => {
+      const w = v.id && byId[v.id];
+      const coste = w ? window.precioPrueba(w) : [4, 9, 14][i] || 8;
+      if (!v.coste) v.coste = coste.toLocaleString("es-ES");
+      if (!v.copa) v.copa = (Math.round((coste / 6) * 3 * 2) / 2 + 1).toLocaleString("es-ES");
+      if (!v.mes) v.mes = String([240, 120, 90][i] || 100);
+    });
+    st.prueba = true;
+    save(); paintForm(); paintResult();
+  });
 
   // ---------- resultado (pantalla y PDF: la misma hoja) ----------
   // una cifra o, si hay horquilla, «de … a …»
@@ -194,7 +207,7 @@
         </tbody>
       </table>`
       : `<p class="cp-empty">Escribe el coste de la botella y el precio de la copa (o su horquilla) para ver las cuentas.</p>`}
-      <footer class="cp-foot"><span>Cálculo orientativo con los datos que ha facilitado el restaurante.${st.iva ? " Los precios de carta incluyen el IVA de hostelería (10 %)." : ""} Disfruta de un consumo responsable.</span><span class="brand-word">${document.body.dataset.brandWord || BRAND}</span></footer>`;
+      <footer class="cp-foot"><span>${st.prueba ? "<b>Datos de prueba: no son precios reales.</b> " : ""}Cálculo orientativo con los datos que ha facilitado el restaurante.${st.iva ? " Los precios de carta incluyen el IVA de hostelería (10 %)." : ""} Disfruta de un consumo responsable.</span><span class="brand-word">${document.body.dataset.brandWord || BRAND}</span></footer>`;
     $("cp-pdf").disabled = !ready;
   }
 
