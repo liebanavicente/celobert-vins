@@ -57,20 +57,39 @@
       saveAll(); paint();
     });
     $("pp-list").addEventListener("click", (e) => {
-      const li = e.target.closest("li[data-id]");
-      if (!li) return;
-      const i = ids.indexOf(li.dataset.id);
-      if (e.target.dataset.a === "up" && i > 0) [ids[i - 1], ids[i]] = [ids[i], ids[i - 1]];
-      if (e.target.dataset.a === "down" && i < ids.length - 1) [ids[i + 1], ids[i]] = [ids[i], ids[i + 1]];
-      if (e.target.dataset.a === "del") ids.splice(i, 1);
+      const btn = e.target.closest("button[data-a]");
+      const li = btn && btn.closest("li[data-id]");
+      if (!li) return; // tocar un campo (cantidad, precio, nota) no redibuja nada: así no se pierde el cursor
+      const a = btn.dataset.a, id = li.dataset.id;
+      if (a === "minus" || a === "plus") {
+        qty[id] = Math.max(1, q(id) + (a === "plus" ? 1 : -1));
+        li.querySelector('input[data-f="qty"]').value = qty[id];
+        saveAll(); paintDoc();
+        return;
+      }
+      const i = ids.indexOf(id);
+      if (a === "up" && i > 0) [ids[i - 1], ids[i]] = [ids[i], ids[i - 1]];
+      if (a === "down" && i < ids.length - 1) [ids[i + 1], ids[i]] = [ids[i], ids[i + 1]];
+      if (a === "del") ids.splice(i, 1);
       saveAll(); paint();
     });
     $("pp-list").addEventListener("input", (e) => {
       const li = e.target.closest("li[data-id]");
       if (!li || !e.target.dataset.f) return;
-      if (e.target.dataset.f === "qty") { qty[li.dataset.id] = Math.max(1, parseInt(e.target.value, 10) || 1); saveAll(); paintDoc(); return; }
+      if (e.target.dataset.f === "qty") {
+        e.target.value = e.target.value.replace(/\D/g, "");
+        if (e.target.value) { qty[li.dataset.id] = Math.max(1, parseInt(e.target.value, 10)); saveAll(); paintDoc(); }
+        return;
+      }
       doc.notas[li.dataset.id] = { ...(doc.notas[li.dataset.id] || {}), [e.target.dataset.f]: e.target.value };
       saveAll(); paintDoc();
+    });
+    // al tocar la cantidad se selecciona entera: lo que se escribe la sustituye
+    $("pp-list").addEventListener("focusin", (e) => {
+      if (e.target.dataset.f === "qty") setTimeout(() => e.target.select(), 0);
+    });
+    $("pp-list").addEventListener("focusout", (e) => {
+      if (e.target.dataset.f === "qty" && !e.target.value) e.target.value = q(e.target.closest("li").dataset.id);
     });
     $("pp-print").addEventListener("click", (e) => exportPDF(e.currentTarget));
     $("pp-link").addEventListener("click", (e) => {
@@ -135,8 +154,8 @@
           <img src="${w.img}" alt="" />
           <div class="pp-li-main">
             <b>${esc(w.name)}</b><small>${esc(w.winery)}</small>
-            <span class="pp-li-row"><label>Cantidad <input data-f="qty" type="number" min="1" inputmode="numeric" value="${q(id)}" /></label></span>
-            <input data-f="precio" placeholder="Precio para el cliente (opcional)" value="${esc(n.precio || "")}" />
+            <span class="pp-li-row"><span class="pp-qty-label">Cantidad</span><span class="pp-qty"><button type="button" data-a="minus" aria-label="Una menos">−</button><input data-f="qty" type="text" inputmode="numeric" pattern="[0-9]*" aria-label="Cantidad" value="${q(id)}" /><button type="button" data-a="plus" aria-label="Una más">+</button></span></span>
+            <input data-f="precio" inputmode="decimal" placeholder="Precio para el cliente (opcional)" value="${esc(n.precio || "")}" />
             <textarea data-f="nota" rows="2" placeholder="Tu nota: por qué este vino para este cliente">${esc(n.nota || "")}</textarea>
           </div>
           <div class="pp-li-ctrl"><button type="button" data-a="up" aria-label="Subir" ${i ? "" : "disabled"}>↑</button><button type="button" data-a="down" aria-label="Bajar" ${i < ids.length - 1 ? "" : "disabled"}>↓</button><button type="button" data-a="del" aria-label="Quitar">×</button></div>

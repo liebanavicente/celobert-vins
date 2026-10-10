@@ -1128,3 +1128,13 @@ body.pp-view .pp-view-only { display: flex; justify-content: space-between; alig
 .pp-order.dense .pp-shelf { height: 144px; }
 .pp-export .pp-shelf figcaption { height: 20px !important; line-height: 20px !important; padding: 0 9px !important; font-size: 12px !important; }
 .pp-export .pp-shelf figcaption { line-height: 12px !important; padding-top: 0 !important; padding-bottom: 8px !important; box-sizing: border-box; }
+
+/* editor de la propuesta: cantidad con − / + y campos cómodos en el móvil */
+.pp-li-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pp-qty-label { font-size: 13px; color: var(--ink-2); }
+.pp-qty { display: inline-flex; align-items: stretch; border: 1.5px solid var(--line); background: #fff; }
+.pp-qty button { width: 40px; height: 40px; border: 0; background: var(--paper); font-size: 20px; line-height: 1; color: var(--ink); cursor: pointer; touch-action: manipulation; }
+.pp-qty button:active { background: var(--olive-soft); }
+.pp-qty input { width: 52px !important; text-align: center; border: 0 !important; padding: 0 !important; font-size: 16px !important; font-weight: 600; background: #fff !important; }
+.pp-li-main input[data-f="precio"], .pp-li-main textarea { font-size: 16px; }
+@media (max-width: 700px) { .pp-list li { grid-template-columns: 30px 1fr; } .pp-li-ctrl { grid-column: 1 / -1; flex-direction: row; justify-content: flex-end; } .pp-li-ctrl button { width: 40px; height: 36px; } }
