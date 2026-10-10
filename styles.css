@@ -1138,3 +1138,10 @@ body.pp-view .pp-view-only { display: flex; justify-content: space-between; alig
 .pp-qty input { width: 52px !important; text-align: center; border: 0 !important; padding: 0 !important; font-size: 16px !important; font-weight: 600; background: #fff !important; }
 .pp-li-main input[data-f="precio"], .pp-li-main textarea { font-size: 16px; }
 @media (max-width: 700px) { .pp-list li { grid-template-columns: 30px 1fr; } .pp-li-ctrl { grid-column: 1 / -1; flex-direction: row; justify-content: flex-end; } .pp-li-ctrl button { width: 40px; height: 36px; } }
+
+/* portada de la propuesta (página 1) */
+.pp-cover-meta .wide { grid-column: 1 / -1; }
+.pp-cover-brand .brand-word { font-size: 34px; }
+.pp-export .pp-cover-brand .brand-word { font-size: 34px !important; }
+.pp-export .pp-cover-meta dd { line-height: 1.35 !important; }
+.pp-order .pp-shelf { margin-top: 26px; }

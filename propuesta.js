@@ -178,20 +178,34 @@
   const fecha = (s) => { try { return new Date(`${s}T12:00:00`).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" }); } catch { return s; } };
   function paintDoc() {
     const wines = ids.map((id) => byId[id]).filter(Boolean);
+    const tipos = [...new Set(wines.map((w) => w.tipoLabel).filter(Boolean))];
     const botellas = wines.reduce((s, w) => s + q(w.id), 0);
     const priced = wines.map((w) => num((doc.notas[w.id] || {}).precio)).map((p, i) => (p != null ? p * q(wines[i].id) : null));
     const conPrecio = priced.filter((p) => p != null).length;
     const total = priced.reduce((s, p) => s + (p || 0), 0);
     $("pp-doc").className = `pp-doc theme-${doc.tema}`;
     $("pp-doc").innerHTML = `
+      <section class="pp-page pp-cover">
+        <div class="pp-cover-mark">${window.mandalaSvg ? window.mandalaSvg() : ""}</div>
+        <p class="pp-k">Propuesta de vinos</p>
+        <h2>${doc.cliente ? `Para <em>${esc(doc.cliente)}</em>` : `Para <em>tu cliente</em>`}</h2>
+        ${doc.intro ? `<p class="pp-intro">${esc(doc.intro)}</p>` : ""}
+        <dl class="pp-cover-meta">
+          ${doc.cliente ? `<div><dt>Cliente</dt><dd>${esc(doc.cliente)}</dd></div>` : ""}
+          ${doc.comercial ? `<div><dt>Tu comercial</dt><dd>${esc(doc.comercial)}</dd></div>` : ""}
+          <div><dt>Fecha</dt><dd>${esc(fecha(doc.fecha))}</dd></div>
+          <div><dt>Selección</dt><dd>${wines.length} ${wines.length === 1 ? "vino" : "vinos"} · ${botellas} ${botellas === 1 ? "botella" : "botellas"}</dd></div>
+          ${tipos.length ? `<div class="wide"><dt>Estilos</dt><dd>${esc(tipos.join(" · "))}</dd></div>` : ""}
+        </dl>
+        <p class="pp-brand pp-cover-brand"><span class="brand-word">celobert<small>vins</small></span></p>
+      </section>
       <section class="pp-page pp-order${wines.length > 9 ? " dense" : ""}">
         <header class="pp-order-head">
           <div class="pp-order-mark">${window.mandalaSvg ? window.mandalaSvg() : ""}</div>
-          <p class="pp-k">Propuesta de vinos</p>
-          <h2>${doc.cliente ? `Para <em>${esc(doc.cliente)}</em>` : `Para <em>tu cliente</em>`}</h2>
+          <p class="pp-k">Propuesta de vinos${doc.cliente ? ` · ${esc(doc.cliente)}` : ""}</p>
+          <h2>El <em>pedido</em></h2>
           <p class="pp-order-meta">${[fecha(doc.fecha), doc.comercial ? `Tu comercial: ${doc.comercial}` : "", `${botellas} ${botellas === 1 ? "botella" : "botellas"} · ${wines.length} ${wines.length === 1 ? "vino" : "vinos"}`].filter(Boolean).map(esc).join(" · ")}</p>
         </header>
-        ${doc.intro ? `<p class="pp-intro">${esc(doc.intro)}</p>` : ""}
         ${wines.length ? `
         <div class="pp-shelf">${wines.slice(0, 12).map((w) => `<figure><img src="${w.img}" alt="" /><figcaption>×${q(w.id)}</figcaption></figure>`).join("")}</div>
         <table class="pp-table">
